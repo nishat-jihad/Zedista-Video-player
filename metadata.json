@@ -1,0 +1,6 @@
+{
+  "name": "ZEDISTRA",
+  "description": "A YouTube-like static video sharing platform featuring video embedding, search, category management with automatic aging, course playlists, commenting, likes, favorites, and content moderation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

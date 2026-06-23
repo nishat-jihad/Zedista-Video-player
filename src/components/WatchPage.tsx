@@ -1,0 +1,522 @@
+import React, { useState, useEffect, useRef } from "react";
+import { 
+  ThumbsUp, 
+  Star, 
+  ChevronDown, 
+  ChevronUp, 
+  Play, 
+  ArrowLeft, 
+  Layers, 
+  MoreVertical, 
+  Edit, 
+  Trash2,
+  X,
+  FileText
+} from "lucide-react";
+import { Video, Comment, Course } from "../types";
+import { getEmbedHtml, formatRelativeTime, extractYouTubeId, getChannelAvatarUrl } from "../utils/videoUtils";
+import CommentSection from "./CommentSection.tsx";
+
+interface WatchPageProps {
+  activeVideo: Video;
+  videos: Video[];
+  comments: Comment[];
+  courses: Course[];
+  username: string;
+  favoriteVideoIds: string[];
+  likedVideoIds: string[];
+  onSetUsername: (name: string) => void;
+  onAddComment: (videoId: string, text: string) => void;
+  onEditComment: (commentId: string, newText: string) => void;
+  onDeleteComment: (commentId: string) => void;
+  onToggleLike: (id: string) => void;
+  onToggleFavorite: (id: string) => void;
+  onPlayVideo: (id: string) => void;
+  onEditVideoDetails: (video: Video) => void;
+  onDeleteVideo: (id: string) => void;
+  onNavigate: (view: "feed" | "watch" | "add" | "courses" | "backup") => void;
+}
+
+export default function WatchPage({
+  activeVideo,
+  videos,
+  comments,
+  courses,
+  username,
+  favoriteVideoIds,
+  likedVideoIds,
+  onSetUsername,
+  onAddComment,
+  onEditComment,
+  onDeleteComment,
+  onToggleLike,
+  onToggleFavorite,
+  onPlayVideo,
+  onEditVideoDetails,
+  onDeleteVideo,
+  onNavigate
+}: WatchPageProps) {
+  const [descExpanded, setDescExpanded] = useState(false);
+  const [showMetadataEdit, setShowMetadataEdit] = useState(false);
+  const [showWatchMenu, setShowWatchMenu] = useState(false);
+  
+  // Metadata edit forms
+  const [editTitle, setEditTitle] = useState(activeVideo.title);
+  const [editDesc, setEditDesc] = useState(activeVideo.description);
+  const [editChannelLink, setEditChannelLink] = useState(activeVideo.channelLink || "");
+
+  const watchMenuRef = useRef<HTMLDivElement>(null);
+
+  const isLiked = likedVideoIds.includes(activeVideo.id);
+  const isFavorite = favoriteVideoIds.includes(activeVideo.id);
+
+  // Sync edit form fields when active video shifts
+  useEffect(() => {
+    setEditTitle(activeVideo.title);
+    setEditDesc(activeVideo.description);
+    setEditChannelLink(activeVideo.channelLink || "");
+    setDescExpanded(false);
+  }, [activeVideo]);
+
+  // Handle clicking outside 3-dot menu
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (watchMenuRef.current && !watchMenuRef.current.contains(event.target as Node)) {
+        setShowWatchMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Find containing course playlist (if any)
+  const containingCourse = courses.find((c) => c.videoIds.includes(activeVideo.id));
+
+  // Recommended list: Videos in the same category, excluding current video, capped at 6
+  let recommended = videos
+    .filter((v) => v.category === activeVideo.category && v.id !== activeVideo.id)
+    .slice(0, 6);
+
+  // If we don't have enough matching category, fill in general videos
+  if (recommended.length < 6) {
+    const filler = videos
+      .filter((v) => v.id !== activeVideo.id && !recommended.some((r) => r.id === v.id))
+      .slice(0, 6 - recommended.length);
+    recommended = [...recommended, ...filler];
+  }
+
+  const handleMetadataUpdateSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (editTitle.trim()) {
+      onEditVideoDetails({
+        ...activeVideo,
+        title: editTitle.trim(),
+        description: editDesc.trim() || "No description provided.",
+        channelLink: editChannelLink.trim() || undefined
+      });
+      setShowMetadataEdit(false);
+    }
+  };
+
+  return (
+    <div id="watch-page-container" className="animate-in fade-in duration-200 text-text-main">
+      
+      {/* Return button row */}
+      <div className="mb-4 flex items-center justify-between">
+        <button
+          id="watch-back-feed-btn"
+          onClick={() => onNavigate("feed")}
+          className="px-3 py-1.5 text-xs text-text-sub hover:text-text-main hover:bg-neutral-100 dark:hover:bg-neutral-800 border border-border-custom rounded-lg flex items-center space-x-1 cursor-pointer transition-all"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to Feed</span>
+        </button>
+
+        {containingCourse && (
+          <div className="text-xs text-red-600 dark:text-red-400 font-semibold flex items-center space-x-1">
+            <Layers className="w-3.5 h-3.5" />
+            <span>Playlist Track Active: {containingCourse.name}</span>
+          </div>
+        )}
+      </div>
+
+      {/* Grid: 2 columns on large displays (Left: Video & Comment Section, Right: Playlist or Recommendations) */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        {/* LEFT COLUMN: Main Player and Details */}
+        <div className="lg:col-span-2 space-y-4">
+          
+          {/* Iframe Aspect Ratio Responsive Video Frame */}
+          <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-lg border border-border-custom bg-black">
+            <div 
+              className="w-full h-full"
+              dangerouslySetInnerHTML={{ __html: getEmbedHtml(activeVideo.embedCode) }}
+            />
+          </div>
+
+          {/* Title & Metadata Card */}
+          <div className="bg-bg-card border border-border-custom rounded-2xl p-5 space-y-4">
+            
+            {/* Upper half: Title and Controls */}
+            <div className="space-y-1.5">
+              
+              <div className="flex justify-between items-start space-x-4">
+                <h1 className="text-lg sm:text-xl font-bold leading-snug text-text-main">
+                  {activeVideo.title}
+                </h1>
+
+                {/* Watching Creator 3-dot Options Menu */}
+                <div ref={watchMenuRef} className="relative">
+                  <button
+                    id="watch-menu-toggle-btn"
+                    onClick={() => setShowWatchMenu(!showWatchMenu)}
+                    className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-sub hover:text-text-main cursor-pointer focus:outline-none"
+                    aria-label="Video management options"
+                  >
+                    <MoreVertical className="w-5 h-5" />
+                  </button>
+
+                  {showWatchMenu && (
+                    <div 
+                      id="watch-dropdown-menu"
+                      className="absolute right-0 mt-1 w-44 bg-bg-card border border-border-custom rounded-xl shadow-xl z-30 py-1.5 text-xs text-text-main animate-in fade-in slide-in-from-top-1"
+                    >
+                      <button
+                        id="watch-menu-edit-btn"
+                        onClick={() => {
+                          setShowMetadataEdit(true);
+                          setShowWatchMenu(false);
+                        }}
+                        className="w-full px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 flex items-center text-left text-blue-600 dark:text-blue-400 cursor-pointer"
+                      >
+                        <Edit className="w-4 h-4 mr-2 text-blue-500 dark:text-blue-400" />
+                        <span>Edit Video Details</span>
+                      </button>
+
+                      <button
+                        id="watch-menu-delete-btn"
+                        onClick={() => {
+                          if (window.confirm("Are you sure you want to delete this video? It will be removed permanently from your library.")) {
+                            onDeleteVideo(activeVideo.id);
+                            onNavigate("feed");
+                          }
+                          setShowWatchMenu(false);
+                        }}
+                        className="w-full px-4 py-2 hover:bg-neutral-100 dark:hover:bg-neutral-800 flex items-center text-left text-red-600 dark:text-red-400 cursor-pointer"
+                      >
+                        <Trash2 className="w-4 h-4 mr-2 text-red-500 dark:text-red-400" />
+                        <span>Delete Video</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Middle row: Channel Profile info and Quick Engagement bars */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-3 border-t border-border-custom">
+              
+              {/* Creator channel info */}
+              <div className="flex items-center space-x-3">
+                {activeVideo.channelLink ? (
+                  <a 
+                    href={activeVideo.channelLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    title="Visit Creator's Channel"
+                    className="w-10 h-10 rounded-full border border-border-custom overflow-hidden block cursor-pointer transition-transform hover:scale-105"
+                  >
+                    <img 
+                      src={getChannelAvatarUrl(activeVideo.channelLink, activeVideo.channelName)} 
+                      alt={activeVideo.channelName} 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeVideo.channelName || "V")}&background=E11D48&color=ffffff&size=128&bold=true`;
+                      }}
+                    />
+                  </a>
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-950/40 border border-red-200 dark:border-red-900 overflow-hidden flex items-center justify-center">
+                    <img 
+                      src={getChannelAvatarUrl(undefined, activeVideo.channelName)} 
+                      alt={activeVideo.channelName} 
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                )}
+                <div>
+                  {activeVideo.channelLink ? (
+                    <a 
+                      href={activeVideo.channelLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="font-bold text-sm text-text-main hover:text-red-600 transition-colors flex items-center space-x-1"
+                    >
+                      <span>{activeVideo.channelName}</span>
+                    </a>
+                  ) : (
+                    <h4 className="font-bold text-sm text-text-main">{activeVideo.channelName}</h4>
+                  )}
+                  <p className="text-[10px] text-text-sub font-medium">Uploaded {formatRelativeTime(activeVideo.createdAt)}</p>
+                </div>
+              </div>
+
+              {/* Engagement Controls: Likes and Favorites */}
+              <div className="flex items-center space-x-2 w-full sm:w-auto">
+                {/* Likes button */}
+                <button
+                  id="watch-like-btn"
+                  onClick={() => onToggleLike(activeVideo.id)}
+                  className={`flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-4 py-2 rounded-full text-xs font-semibold cursor-pointer border transition-all ${
+                    isLiked 
+                      ? "bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-900 text-red-600 dark:text-red-400" 
+                      : "bg-neutral-50 dark:bg-neutral-900 border-border-custom hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-sub hover:text-text-main"
+                  }`}
+                >
+                  <ThumbsUp className={`w-4 h-4 ${isLiked ? "fill-red-600 dark:fill-red-400" : ""}`} />
+                  <span>{activeVideo.likes} Likes</span>
+                </button>
+
+                {/* Favorites save Button */}
+                <button
+                  id="watch-favorite-btn"
+                  onClick={() => onToggleFavorite(activeVideo.id)}
+                  className={`flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-4 py-2 rounded-full text-xs font-semibold cursor-pointer border transition-all ${
+                    isFavorite 
+                      ? "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900 text-amber-600 dark:text-amber-400" 
+                      : "bg-neutral-50 dark:bg-neutral-900 border-border-custom hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-sub hover:text-text-main"
+                  }`}
+                  title="Save to favorites list"
+                >
+                  <Star className={`w-4 h-4 ${isFavorite ? "fill-amber-500 text-amber-500" : ""}`} />
+                  <span>{isFavorite ? "Favorited" : "Save"}</span>
+                </button>
+              </div>
+
+            </div>
+
+            {/* Description Box collapse block */}
+            <div id="collapsible-description-box" className="p-4 bg-neutral-50/50 dark:bg-neutral-900/40 rounded-xl border border-border-custom space-y-2">
+              <div className="flex items-center space-x-2 text-xs font-semibold text-text-sub">
+                <FileText className="w-3.5 h-3.5" />
+                <span>Description Metadata Log</span>
+              </div>
+              <p className={`text-xs text-text-main leading-relaxed whitespace-pre-wrap ${descExpanded ? "" : "line-clamp-3"}`}>
+                {activeVideo.description || "No lecture notes included."}
+              </p>
+              <button
+                id="watch-toggle-desc-btn"
+                onClick={() => setDescExpanded(!descExpanded)}
+                className="text-[11px] font-bold text-red-600 dark:text-red-400 hover:text-red-700 flex items-center space-x-0.5 cursor-pointer focus:outline-none"
+              >
+                <span>{descExpanded ? "Show Less" : "Show More"}</span>
+                {descExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+              </button>
+            </div>
+
+          </div>
+
+          {/* Conditional Metadata Inline Editor Form */}
+          {showMetadataEdit && (
+            <form 
+              onSubmit={handleMetadataUpdateSubmit}
+              id="watch-edit-metadata-form"
+              className="bg-bg-card border-2 border-red-500 rounded-2xl p-5 space-y-4 animate-in slide-in-from-top-1"
+            >
+              <div className="flex justify-between items-center border-b border-neutral-100 pb-2">
+                <h3 className="font-bold text-sm text-neutral-900 flex items-center">
+                  <Edit className="w-4 h-4 mr-1.5 text-blue-500" />
+                  <span>Update Video Information</span>
+                </h3>
+                <button
+                  id="watch-cancel-edit-btn"
+                  type="button"
+                  onClick={() => setShowMetadataEdit(false)}
+                  className="p-1 rounded-full hover:bg-neutral-100 text-neutral-400 hover:text-neutral-600 cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="space-y-3 text-xs">
+                <div className="space-y-1">
+                  <label className="block font-medium text-neutral-500">Video Title *</label>
+                  <input
+                    id="watch-edit-title-input"
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    className="w-full px-3 py-2 border border-border-custom rounded-lg focus:outline-none focus:border-red-500 text-sm bg-neutral-50 focus:bg-white text-neutral-900"
+                    required
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="block font-medium text-neutral-500">The creator channel link</label>
+                  <input
+                    id="watch-edit-channel-link-input"
+                    type="url"
+                    value={editChannelLink}
+                    onChange={(e) => setEditChannelLink(e.target.value)}
+                    placeholder="e.g. https://www.youtube.com/@channelName"
+                    className="w-full px-3 py-2 border border-border-custom rounded-lg focus:outline-none focus:border-red-500 text-sm bg-neutral-50 focus:bg-white text-neutral-900"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="block font-medium text-neutral-500">Description syllabus</label>
+                  <textarea
+                    id="watch-edit-desc-input"
+                    rows={4}
+                    value={editDesc}
+                    onChange={(e) => setEditDesc(e.target.value)}
+                    className="w-full px-3 py-2 border border-border-custom rounded-lg focus:outline-none focus:border-red-500 text-sm bg-neutral-50 focus:bg-white text-neutral-900 resize-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end space-x-2 text-xs">
+                <button
+                  id="watch-edit-submit-btn"
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg cursor-pointer transition-colors"
+                >
+                  Save Changes
+                </button>
+                <button
+                  id="watch-edit-cancel-btn-bottom"
+                  type="button"
+                  onClick={() => setShowMetadataEdit(false)}
+                  className="px-4 py-2 border border-border-custom rounded-lg hover:bg-neutral-100 text-neutral-700 cursor-pointer"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
+
+          {/* Comments section card */}
+          <CommentSection
+            videoId={activeVideo.id}
+            comments={comments}
+            username={username}
+            onSetUsername={onSetUsername}
+            onAddComment={onAddComment}
+            onEditComment={onEditComment}
+            onDeleteComment={onDeleteComment}
+          />
+
+        </div>
+
+        {/* RIGHT COLUMN: Playlists / Recommendations Sidebar */}
+        <div className="space-y-5">
+          
+          {/* Active Course Playlist Box Display */}
+          {containingCourse && (
+            <div id="watch-course-playlist-panel" className="bg-neutral-900 text-white rounded-2xl border border-neutral-800 shadow-md overflow-hidden">
+              {/* Header Box title */}
+              <div className="bg-neutral-950 p-4 border-b border-neutral-800">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Layers className="w-4 h-4 text-red-500" />
+                    <span className="font-bold text-xs uppercase tracking-wider text-red-500">Course Syllabus</span>
+                  </div>
+                  <span className="text-[10px] text-neutral-400 bg-neutral-800 px-2 py-0.5 rounded font-mono">
+                    {containingCourse.videoIds.indexOf(activeVideo.id) + 1} / {containingCourse.videoIds.length}
+                  </span>
+                </div>
+                <h3 className="font-bold text-sm mt-1.5 line-clamp-1">{containingCourse.name}</h3>
+              </div>
+
+              {/* Playlist Tracks List */}
+              <div className="max-h-80 overflow-y-auto no-scrollbar py-1">
+                {containingCourse.videoIds.map((vidId, index) => {
+                  const itemVideo = videos.find((v) => v.id === vidId);
+                  if (!itemVideo) return null;
+                  
+                  const isCurrent = itemVideo.id === activeVideo.id;
+                  
+                  return (
+                    <div
+                      key={itemVideo.id}
+                      id={`watch-playlist-track-${itemVideo.id}`}
+                      onClick={() => onPlayVideo(itemVideo.id)}
+                      className={`flex items-center space-x-3 p-2.5 cursor-pointer text-left transition-colors border-l-4 ${
+                        isCurrent 
+                          ? "bg-neutral-800 border-red-600 text-white font-semibold" 
+                          : "border-transparent text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200"
+                      }`}
+                    >
+                      {/* Play or Index status */}
+                      <span className="w-6 text-center text-xs font-mono font-bold flex-shrink-0">
+                        {isCurrent ? <Play className="w-3.5 h-3.5 text-red-500 fill-current mx-auto" /> : String(index + 1).padStart(2, "0")}
+                      </span>
+
+                      {/* Info */}
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xs font-semibold truncate leading-tight">{itemVideo.title}</h4>
+                        <p className="text-[10px] text-neutral-500 truncate mt-0.5">{itemVideo.channelName}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Recommended Videos list */}
+          <div id="watch-recommendations-panel" className="space-y-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-500">Recommended Lessons</h3>
+
+            <div className="space-y-3">
+              {recommended.map((video) => {
+                const ytId = extractYouTubeId(video.embedCode);
+                
+                return (
+                  <div
+                    key={video.id}
+                    id={`watch-rec-row-${video.id}`}
+                    onClick={() => onPlayVideo(video.id)}
+                    className="flex space-x-3 group cursor-pointer text-left"
+                  >
+                    {/* Small thumbnail */}
+                    <div className="relative w-28 aspect-video bg-neutral-950 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-200">
+                      {ytId ? (
+                        <img
+                          src={`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`}
+                          alt={video.title}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-tr from-neutral-800 to-red-950 flex items-center justify-center text-white text-[10px] font-bold">
+                          <Play className="w-3 h-3 fill-current text-red-500" />
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Lesson texts */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-center">
+                      <h4 
+                        className="text-xs font-semibold leading-tight text-neutral-900 group-hover:text-red-600 line-clamp-2 transition-colors"
+                        title={video.title}
+                      >
+                        {video.title}
+                      </h4>
+                      <p className="text-[10px] text-text-sub mt-1 truncate">{video.channelName}</p>
+                      <span className="text-[9px] text-neutral-400 mt-0.5">{video.likes} likes</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  );
+}
