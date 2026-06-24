@@ -26,6 +26,7 @@ export default function AddVideoForm({
 }: AddVideoFormProps) {
   const [embedInput, setEmbedInput] = useState("");
   const [title, setTitle] = useState("");
+  const [duration, setDuration] = useState("10:00");
   const [description, setDescription] = useState("");
   const [channelName, setChannelName] = useState("");
   const [channelLink, setChannelLink] = useState("");
@@ -98,6 +99,7 @@ export default function AddVideoForm({
     const videoData = {
       embedCode: embedInput.trim(),
       title: title.trim(),
+      duration: duration.trim() || "10:00",
       description: description.trim() || "No description provided.",
       channelName: channelName.trim() || "Independent Creator",
       channelLink: channelLink.trim() || undefined,
@@ -175,6 +177,23 @@ export default function AddVideoForm({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Write a catchy, descriptive title for the video"
+            className="w-full px-3 py-2 text-sm border border-border-custom rounded-lg focus:outline-none focus:border-red-500 bg-neutral-50 focus:bg-white text-neutral-900"
+            required
+          />
+        </div>
+
+        {/* Video Duration */}
+        <div className="space-y-1">
+          <label className="block text-xs font-semibold text-neutral-500 uppercase tracking-wide flex items-center justify-between">
+            <span>Video Duration *</span>
+            <span className="text-[10px] lowercase text-neutral-400 font-normal">e.g. 14:23, 5:00, 1:24:50</span>
+          </label>
+          <input
+            id="duration-input-field"
+            type="text"
+            value={duration}
+            onChange={(e) => setDuration(e.target.value)}
+            placeholder="e.g. 10:00, 4:15, 2:30:00"
             className="w-full px-3 py-2 text-sm border border-border-custom rounded-lg focus:outline-none focus:border-red-500 bg-neutral-50 focus:bg-white text-neutral-900"
             required
           />
@@ -342,6 +361,7 @@ export default function AddVideoForm({
             onClick={() => {
               setEmbedInput("");
               setTitle("");
+              setDuration("10:00");
               setDescription("");
               setChannelName("");
               setChannelLink("");

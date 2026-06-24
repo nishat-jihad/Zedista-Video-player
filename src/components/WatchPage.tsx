@@ -15,7 +15,7 @@ import {
   FileText
 } from "lucide-react";
 import { Video, Comment, Course } from "../types";
-import { getEmbedHtml, formatRelativeTime, extractYouTubeId, getChannelAvatarUrl } from "../utils/videoUtils";
+import { getEmbedHtml, formatRelativeTime, extractYouTubeId, getChannelAvatarUrl, getVideoDuration } from "../utils/videoUtils";
 import CommentSection from "./CommentSection.tsx";
 
 const VideoPlayer = React.memo(({ embedCode }: { embedCode: string }) => {
@@ -76,6 +76,7 @@ export default function WatchPage({
   const [editTitle, setEditTitle] = useState(activeVideo.title);
   const [editDesc, setEditDesc] = useState(activeVideo.description);
   const [editChannelLink, setEditChannelLink] = useState(activeVideo.channelLink || "");
+  const [editDuration, setEditDuration] = useState(activeVideo.duration || getVideoDuration(activeVideo));
 
   const watchMenuRef = useRef<HTMLDivElement>(null);
 
@@ -87,6 +88,7 @@ export default function WatchPage({
     setEditTitle(activeVideo.title);
     setEditDesc(activeVideo.description);
     setEditChannelLink(activeVideo.channelLink || "");
+    setEditDuration(activeVideo.duration || getVideoDuration(activeVideo));
     setDescExpanded(false);
     setMobileCommentsExpanded(false);
   }, [activeVideo]);
@@ -139,7 +141,8 @@ export default function WatchPage({
         ...activeVideo,
         title: editTitle.trim(),
         description: editDesc.trim() || "No description provided.",
-        channelLink: editChannelLink.trim() || undefined
+        channelLink: editChannelLink.trim() || undefined,
+        duration: editDuration.trim() || undefined
       });
       setShowMetadataEdit(false);
     }
@@ -371,6 +374,20 @@ export default function WatchPage({
                     onChange={(e) => setEditTitle(e.target.value)}
                     className="w-full px-3 py-2 border border-border-custom rounded-lg focus:outline-none focus:border-red-500 text-sm bg-neutral-50 focus:bg-white text-neutral-900"
                     required
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="block font-medium text-neutral-500 text-left flex justify-between">
+                    <span>Video Duration</span>
+                    <span className="text-[10px] text-neutral-400 font-normal">Format: MM:SS or H:MM:SS</span>
+                  </label>
+                  <input
+                    id="watch-edit-duration-input"
+                    type="text"
+                    value={editDuration}
+                    onChange={(e) => setEditDuration(e.target.value)}
+                    className="w-full px-3 py-2 border border-border-custom rounded-lg focus:outline-none focus:border-red-500 text-sm bg-neutral-50 focus:bg-white text-neutral-900"
+                    placeholder="e.g. 14:23, 5:00, 1:24:50"
                   />
                 </div>
                 <div className="space-y-1">

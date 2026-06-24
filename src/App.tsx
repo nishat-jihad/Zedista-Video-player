@@ -253,7 +253,8 @@ export default function App() {
           title: editedVideo.title,
           description: editedVideo.description,
           category: editedVideo.category ?? v.category,
-          originalCategory: editedVideo.originalCategory ?? v.originalCategory
+          originalCategory: editedVideo.originalCategory ?? v.originalCategory,
+          duration: editedVideo.duration ?? v.duration
         };
       }
       return v;
