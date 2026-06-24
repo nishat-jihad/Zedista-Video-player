@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { 
   ThumbsUp, 
-  ThumbsDown,
   Share2,
-  Bell,
   Star, 
   ChevronDown, 
   ChevronUp, 
@@ -73,18 +71,6 @@ export default function WatchPage({
   const [showWatchMenu, setShowWatchMenu] = useState(false);
   const [mobileCommentsExpanded, setMobileCommentsExpanded] = useState(false);
   const [shareToast, setShareToast] = useState(false);
-
-  // Subscribed channels from local storage to simulate persistent subscriptions
-  const [subscribedChannels, setSubscribedChannels] = useState<string[]>(() => {
-    const stored = localStorage.getItem("zedistra_subscribed_channels");
-    return stored ? JSON.parse(stored) : [];
-  });
-
-  // Disliked videos from local storage to simulate dislike behavior
-  const [dislikedVideoIds, setDislikedVideoIds] = useState<string[]>(() => {
-    const stored = localStorage.getItem("zedistra_disliked_videos");
-    return stored ? JSON.parse(stored) : [];
-  });
   
   // Metadata edit forms
   const [editTitle, setEditTitle] = useState(activeVideo.title);
@@ -95,8 +81,6 @@ export default function WatchPage({
 
   const isLiked = likedVideoIds.includes(activeVideo.id);
   const isFavorite = favoriteVideoIds.includes(activeVideo.id);
-  const isSubscribed = subscribedChannels.includes(activeVideo.channelName);
-  const isDisliked = dislikedVideoIds.includes(activeVideo.id);
 
   // Sync edit form fields when active video shifts
   useEffect(() => {
@@ -120,57 +104,11 @@ export default function WatchPage({
     };
   }, []);
 
-  const handleToggleSubscribe = () => {
-    let updated;
-    if (isSubscribed) {
-      updated = subscribedChannels.filter((c) => c !== activeVideo.channelName);
-    } else {
-      updated = [...subscribedChannels, activeVideo.channelName];
-    }
-    setSubscribedChannels(updated);
-    localStorage.setItem("zedistra_subscribed_channels", JSON.stringify(updated));
-  };
-
-  const handleToggleDislike = () => {
-    let updated;
-    if (isDisliked) {
-      updated = dislikedVideoIds.filter((id) => id !== activeVideo.id);
-    } else {
-      updated = [...dislikedVideoIds, activeVideo.id];
-      if (likedVideoIds.includes(activeVideo.id)) {
-        onToggleLike(activeVideo.id);
-      }
-    }
-    setDislikedVideoIds(updated);
-    localStorage.setItem("zedistra_disliked_videos", JSON.stringify(updated));
-  };
-
-  const handleLikeClick = () => {
-    if (isDisliked) {
-      const updatedDislikes = dislikedVideoIds.filter((id) => id !== activeVideo.id);
-      setDislikedVideoIds(updatedDislikes);
-      localStorage.setItem("zedistra_disliked_videos", JSON.stringify(updatedDislikes));
-    }
-    onToggleLike(activeVideo.id);
-  };
-
   const handleShareClick = () => {
     const videoUrl = `${window.location.origin}?video=${activeVideo.id}`;
     navigator.clipboard.writeText(videoUrl);
     setShareToast(true);
     setTimeout(() => setShareToast(false), 2500);
-  };
-
-  const getSubscribersText = (channelName: string) => {
-    const sum = channelName.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const count = (sum % 900) + 100; // 100 to 999
-    const suffix = sum % 2 === 0 ? "K" : "M";
-    return `${(count / 10).toFixed(1)}${suffix} subscribers`;
-  };
-
-  const getViewsText = (likesCount: number) => {
-    const count = likesCount * 47 + 1042;
-    return count.toLocaleString();
   };
 
   // Find containing course playlist (if any)
@@ -236,12 +174,12 @@ export default function WatchPage({
         <div className="lg:col-span-2 space-y-4">
           
           {/* Iframe Aspect Ratio Responsive Video Frame */}
-          <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-lg border border-border-custom bg-black">
+          <div className="-mx-4 sm:mx-0 aspect-video rounded-none sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg border-y sm:border border-border-custom bg-black">
             <VideoPlayer embedCode={activeVideo.embedCode} />
           </div>
 
           {/* Title & Metadata & Action row */}
-          <div className="space-y-3 mt-3 px-1 sm:px-0">
+          <div className="space-y-3 mt-3 px-2 sm:px-0">
             <div className="flex justify-between items-start gap-4">
               <h1 className="text-base sm:text-lg md:text-xl font-bold leading-snug text-text-main break-words text-left">
                 {activeVideo.title}
@@ -294,8 +232,8 @@ export default function WatchPage({
               </div>
             </div>
 
-            {/* Middle row: Channel Profile info and Quick Engagement bars */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-1 pb-3 border-b border-border-custom">
+            {/* Middle row: Channel Profile info and Engagement Controls */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-3 pb-4 border-b border-border-custom">
               
               {/* Creator channel info */}
               <div className="flex items-center gap-3">
@@ -308,13 +246,13 @@ export default function WatchPage({
                     className="w-10 h-10 rounded-full border border-border-custom overflow-hidden block cursor-pointer transition-transform hover:scale-105"
                   >
                     <img 
-                      src={getChannelAvatarUrl(activeVideo.channelLink, activeVideo.channelName)} 
-                      alt={activeVideo.channelName} 
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeVideo.channelName || "V")}&background=E11D48&color=ffffff&size=128&bold=true`;
-                      }}
+                    src={getChannelAvatarUrl(activeVideo.channelLink, activeVideo.channelName)} 
+                    alt={activeVideo.channelName} 
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeVideo.channelName || "V")}&background=E11D48&color=ffffff&size=128&bold=true`;
+                    }}
                     />
                   </a>
                 ) : (
@@ -333,142 +271,70 @@ export default function WatchPage({
                       href={activeVideo.channelLink} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="font-bold text-xs sm:text-sm text-text-main hover:text-red-600 transition-colors block truncate"
+                      className="font-bold text-sm text-text-main hover:text-red-600 transition-colors block truncate"
                     >
                       {activeVideo.channelName}
                     </a>
                   ) : (
-                    <h4 className="font-bold text-xs sm:text-sm text-text-main truncate">{activeVideo.channelName}</h4>
+                    <h4 className="font-bold text-sm text-text-main truncate">{activeVideo.channelName}</h4>
                   )}
-                  <p className="text-[10px] text-text-sub font-medium leading-none mt-0.5">
-                    {getSubscribersText(activeVideo.channelName)}
+                  <p className="text-[10px] text-text-sub font-medium leading-none mt-1">
+                    Uploaded {formatRelativeTime(activeVideo.createdAt)}
                   </p>
-                </div>
-
-                {/* Subscribe Button */}
-                <div className="ml-2 flex-shrink-0">
-                  {isSubscribed ? (
-                    <button
-                      onClick={handleToggleSubscribe}
-                      className="bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-text-main font-semibold px-3 sm:px-4 py-1.5 rounded-full text-xs cursor-pointer transition-colors flex items-center gap-1 shadow-sm"
-                    >
-                      <Bell className="w-3.5 h-3.5 text-text-sub" />
-                      <span>Subscribed</span>
-                    </button>
-                  ) : (
-                    <button
-                      onClick={handleToggleSubscribe}
-                      className="bg-black hover:bg-neutral-900 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-neutral-900 font-bold px-3 sm:px-4 py-1.5 rounded-full text-xs cursor-pointer transition-colors shadow-sm"
-                    >
-                      Subscribe
-                    </button>
-                  )}
                 </div>
               </div>
 
-              {/* Engagement Controls: Likes, Share, and Save */}
-              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 max-w-full">
-                {/* Likes / Dislikes joined split button */}
-                <div className="flex items-center bg-neutral-100 dark:bg-neutral-800 rounded-full h-9 p-0.5 overflow-hidden flex-shrink-0">
-                  <button
-                    id="watch-like-btn"
-                    onClick={handleLikeClick}
-                    className={`flex items-center gap-1.5 px-3.5 h-full text-xs font-semibold cursor-pointer rounded-l-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors ${
-                      isLiked 
-                        ? "text-red-600 dark:text-red-400" 
-                        : "text-text-main"
-                    }`}
-                    title="I like this lecture"
-                  >
-                    <ThumbsUp className={`w-3.5 h-3.5 ${isLiked ? "fill-red-600 dark:fill-red-400 text-red-600 dark:text-red-400" : ""}`} />
-                    <span>{activeVideo.likes}</span>
-                  </button>
-                  <div className="h-4 w-[1px] bg-neutral-300 dark:bg-neutral-700" />
-                  <button
-                    id="watch-dislike-btn"
-                    onClick={handleToggleDislike}
-                    className={`flex items-center justify-center px-3.5 h-full cursor-pointer rounded-r-full hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors ${
-                      isDisliked 
-                        ? "text-red-600 dark:text-red-400" 
-                        : "text-text-sub"
-                    }`}
-                    title="I dislike this lecture"
-                  >
-                    <ThumbsDown className={`w-3.5 h-3.5 ${isDisliked ? "fill-red-600 dark:fill-red-400 text-red-600 dark:text-red-400" : ""}`} />
-                  </button>
-                </div>
+              {/* Engagement Controls: Likes and Save */}
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                {/* Likes button */}
+                <button
+                  id="watch-like-btn"
+                  onClick={() => onToggleLike(activeVideo.id)}
+                  className={`flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-4 py-2 rounded-full text-xs font-semibold cursor-pointer border transition-all ${
+                    isLiked 
+                      ? "bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-900 text-red-600 dark:text-red-400" 
+                      : "bg-neutral-50 dark:bg-neutral-900 border-border-custom hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-sub hover:text-text-main"
+                  }`}
+                >
+                  <ThumbsUp className={`w-4 h-4 ${isLiked ? "fill-red-600 dark:fill-red-400" : ""}`} />
+                  <span>{activeVideo.likes} Likes</span>
+                </button>
 
-                {/* Share Pill Button */}
-                <div className="relative flex-shrink-0">
-                  <button
-                    id="watch-share-btn"
-                    onClick={handleShareClick}
-                    className="flex items-center gap-1.5 px-3.5 h-9 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-text-main rounded-full text-xs font-semibold cursor-pointer transition-colors"
-                  >
-                    <Share2 className="w-3.5 h-3.5 text-text-sub" />
-                    <span>Share</span>
-                  </button>
-                  
-                  {shareToast && (
-                    <div className="absolute top-10 left-1/2 -translate-x-1/2 bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-[10px] py-1 px-2.5 rounded-md whitespace-nowrap shadow-lg z-20 animate-in fade-in duration-200">
-                      Copied lecture link!
-                    </div>
-                  )}
-                </div>
-
-                {/* Save to Favorites Star Pill */}
+                {/* Favorites save Button */}
                 <button
                   id="watch-favorite-btn"
                   onClick={() => onToggleFavorite(activeVideo.id)}
-                  className={`flex items-center gap-1.5 px-3.5 h-9 rounded-full text-xs font-semibold cursor-pointer transition-colors flex-shrink-0 ${
+                  className={`flex-1 sm:flex-initial flex items-center justify-center space-x-2 px-4 py-2 rounded-full text-xs font-semibold cursor-pointer border transition-all ${
                     isFavorite 
-                      ? "bg-amber-100 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 font-bold" 
-                      : "bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-text-main"
+                      ? "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900 text-amber-600 dark:text-amber-400" 
+                      : "bg-neutral-50 dark:bg-neutral-900 border-border-custom hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-sub hover:text-text-main"
                   }`}
-                  title="Save to favorites"
+                  title="Save to favorites list"
                 >
-                  <Star className={`w-3.5 h-3.5 ${isFavorite ? "fill-amber-500 text-amber-500" : ""}`} />
-                  <span>{isFavorite ? "Saved" : "Save"}</span>
+                  <Star className={`w-4 h-4 ${isFavorite ? "fill-amber-500 text-amber-500" : ""}`} />
+                  <span>{isFavorite ? "Favorited" : "Save"}</span>
                 </button>
               </div>
 
             </div>
 
-            {/* Description Box collapse block styled like modern Youtube */}
-            <div 
-              id="collapsible-description-box" 
-              onClick={() => !descExpanded && setDescExpanded(true)}
-              className={`p-3 bg-neutral-100 hover:bg-neutral-200/80 dark:bg-neutral-800/40 dark:hover:bg-neutral-800/60 rounded-xl transition-all select-none text-xs sm:text-sm space-y-1.5 ${
-                !descExpanded ? "cursor-pointer" : ""
-              }`}
-            >
-              <div className="flex flex-wrap items-center gap-x-3 text-xs font-bold text-text-main">
-                <span>{getViewsText(activeVideo.likes)} views</span>
-                <span>{formatRelativeTime(activeVideo.createdAt)}</span>
-                <span className="text-blue-600 dark:text-blue-400">#{activeVideo.category.replace(/\s+/g, '')}</span>
-                <span className="text-blue-600 dark:text-blue-400">#Education</span>
+            {/* Description Box collapse block */}
+            <div id="collapsible-description-box" className="p-4 bg-neutral-50/50 dark:bg-neutral-900/40 rounded-xl border border-border-custom space-y-2">
+              <div className="flex items-center space-x-2 text-xs font-semibold text-text-sub">
+                <FileText className="w-3.5 h-3.5" />
+                <span>Description Metadata Log</span>
               </div>
-              
-              <p className={`text-xs sm:text-sm text-text-main leading-relaxed whitespace-pre-wrap break-words text-left ${descExpanded ? "" : "line-clamp-2"}`}>
-                {activeVideo.description || "No lecture syllabus notes included."}
+              <p className={`text-xs text-text-main leading-relaxed whitespace-pre-wrap break-all break-words text-left ${descExpanded ? "" : "line-clamp-3"}`}>
+                {activeVideo.description || "No lecture notes included."}
               </p>
-
-              {descExpanded ? (
-                <button
-                  id="watch-toggle-desc-btn-less"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setDescExpanded(false);
-                  }}
-                  className="text-xs font-bold text-neutral-800 dark:text-neutral-200 mt-1 hover:underline flex items-center space-x-0.5 cursor-pointer focus:outline-none"
-                >
-                  <span>Show Less</span>
-                </button>
-              ) : (
-                <span className="text-xs font-bold text-neutral-800 dark:text-neutral-200 block mt-0.5 text-left">
-                  ...more
-                </span>
-              )}
+              <button
+                id="watch-toggle-desc-btn"
+                onClick={() => setDescExpanded(!descExpanded)}
+                className="text-[11px] font-bold text-red-600 dark:text-red-400 hover:text-red-700 flex items-center space-x-0.5 cursor-pointer focus:outline-none"
+              >
+                <span>{descExpanded ? "Show Less" : "Show More"}</span>
+                {descExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+              </button>
             </div>
 
           </div>
