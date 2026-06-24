@@ -17,6 +17,15 @@ import { Video, Comment, Course } from "../types";
 import { getEmbedHtml, formatRelativeTime, extractYouTubeId, getChannelAvatarUrl } from "../utils/videoUtils";
 import CommentSection from "./CommentSection.tsx";
 
+const VideoPlayer = React.memo(({ embedCode }: { embedCode: string }) => {
+  return (
+    <div 
+      className="w-full h-full"
+      dangerouslySetInnerHTML={{ __html: getEmbedHtml(embedCode) }}
+    />
+  );
+}, (prevProps, nextProps) => prevProps.embedCode === nextProps.embedCode);
+
 interface WatchPageProps {
   activeVideo: Video;
   videos: Video[];
@@ -150,10 +159,7 @@ export default function WatchPage({
           
           {/* Iframe Aspect Ratio Responsive Video Frame */}
           <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-lg border border-border-custom bg-black">
-            <div 
-              className="w-full h-full"
-              dangerouslySetInnerHTML={{ __html: getEmbedHtml(activeVideo.embedCode) }}
-            />
+            <VideoPlayer embedCode={activeVideo.embedCode} />
           </div>
 
           {/* Title & Metadata Card */}
@@ -305,7 +311,7 @@ export default function WatchPage({
                 <FileText className="w-3.5 h-3.5" />
                 <span>Description Metadata Log</span>
               </div>
-              <p className={`text-xs text-text-main leading-relaxed whitespace-pre-wrap ${descExpanded ? "" : "line-clamp-3"}`}>
+              <p className={`text-xs text-text-main leading-relaxed whitespace-pre-wrap break-all break-words ${descExpanded ? "" : "line-clamp-3"}`}>
                 {activeVideo.description || "No lecture notes included."}
               </p>
               <button
