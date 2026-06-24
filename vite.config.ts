@@ -5,7 +5,6 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/Zedista-Video-player/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
