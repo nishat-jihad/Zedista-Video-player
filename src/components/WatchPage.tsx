@@ -21,7 +21,7 @@ import CommentSection from "./CommentSection.tsx";
 const VideoPlayer = React.memo(({ embedCode }: { embedCode: string }) => {
   return (
     <div 
-      className="w-full h-full"
+      className="absolute inset-0 w-full h-full [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:w-full [&_iframe]:h-full [&_iframe]:border-0 [&_video]:absolute [&_video]:inset-0 [&_video]:w-full [&_video]:h-full [&_video]:border-0"
       dangerouslySetInnerHTML={{ __html: getEmbedHtml(embedCode) }}
     />
   );
@@ -174,7 +174,7 @@ export default function WatchPage({
         <div className="lg:col-span-2 space-y-4">
           
           {/* Iframe Aspect Ratio Responsive Video Frame */}
-          <div className="-mx-4 sm:mx-0 aspect-video rounded-none sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg border-y sm:border border-border-custom bg-black">
+          <div className="relative -mx-4 sm:mx-0 aspect-video rounded-none sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg border-y sm:border border-border-custom bg-black">
             <VideoPlayer embedCode={activeVideo.embedCode} />
           </div>
 

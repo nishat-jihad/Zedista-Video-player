@@ -1,6 +1,7 @@
 import { Video, Course, Comment } from "../types";
 
 export const getInitialVideos = (): Video[] => {
+  const now = Date.now();
   return [
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/QWJb6-jFT3w\" title=\"HSC 2026 বাংলা রচনা সাজেশন | মাত্র ৫টি রচনা পড়লেই কি ১০০% কমন?\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -11,7 +12,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290744498",
-      "createdAt": 1782290744498,
+      "createdAt": now - 10 * 60 * 1000, // 10 minutes ago
       "likes": 0
     },
     {
@@ -23,7 +24,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290612788",
-      "createdAt": 1782290612788,
+      "createdAt": now - 25 * 60 * 1000, // 25 minutes ago
       "likes": 0
     },
     {
@@ -35,31 +36,31 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290559788",
-      "createdAt": 1782290559788,
+      "createdAt": now - 40 * 60 * 1000, // 40 minutes ago
       "likes": 0
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/k7sgHtBWSEM?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"যোগজীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
       "title": "যোগজীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
-      "description": "1:18  অন্তরীকরণ\n4:32 নিদিষ্ট যোগজ\n15:01 assumption method\n 22:52 option test \n26:53 নির্দিষ্ট যোগজ",
+      "description": "1:18  অন্টারীকরণ\n4:32 নিদিষ্ট যোগজ\n15:01 assumption method\n 22:52 option test \n26:53 নির্দিষ্ট যোগজ",
       "channelName": "Rakib's Classroom - HSC",
       "channelLink": "https://www.youtube.com/@Rakibs_HSC",
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290496208",
-      "createdAt": 1782290496208,
+      "createdAt": now - 55 * 60 * 1000, // 55 minutes ago
       "likes": 0
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/ld0g2bj6esQ?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"অন্তরীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "অন্তরীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
+      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/ld0g2bj6esQ?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"অন্টারীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "title": "অন্টারীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
       "description": "15:10 Cw calculator\n53:11 Cw \n1:13:24 Cw\n𝗠𝗼𝗱𝘂𝗹𝘂𝘀 : catalogue > numeric calc> absolute value",
       "channelName": "Rakib's Classroom - HSC",
       "channelLink": "https://www.youtube.com/@Rakibs_HSC",
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290422076",
-      "createdAt": 1782290422076,
+      "createdAt": now - 75 * 60 * 1000, // 1 hour 15m ago
       "likes": 0
     },
     {
@@ -71,7 +72,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290356245",
-      "createdAt": 1782290356245,
+      "createdAt": now - 105 * 60 * 1000, // 1 hour 45m ago
       "likes": 0
     },
     {
@@ -83,19 +84,19 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290274526",
-      "createdAt": 1782290274526,
+      "createdAt": now - 135 * 60 * 1000, // 2 hours 15m ago
       "likes": 0
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/MX1re8Iql0Y?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"জটিল সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই  - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "জটিল সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
+      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/MX1re8Iql0Y?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"জटिल সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই  - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "title": "জटिल সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
       "description": "0:58 -  ES Plus Series\n21:25 - Ex Series\n34:35 - CW Series\n52:00 Common For all Calculator\n\n44:50 এখানে (CW Calculator) মডুলাস আর আর্গুমেন্ট অন্যভাবেও বের করা যায়। জটিল সংখ্যাটি তুলে EXE তে চাপ দেওয়ার পর Format বাটনে ক্লিক করলে Polar Coord নামে একটা অপশন আসে। ঐখানে চাপ দিলে মডুলাস আর আর্গুমেন্ট একসাথেই এসে পড়ে অন্য ক্যালকুলেটর গুলার মতো। তাহলে আর কষ্ট করে বের করতে হয় না। আর Rectangular Coord এ চাপ দিলে a+bi আকারে আসে।",
       "channelName": "Rakib's Classroom - HSC",
       "channelLink": "https://www.youtube.com/@Rakibs_HSC",
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290213569",
-      "createdAt": 1782290213569,
+      "createdAt": now - 165 * 60 * 1000, // 2 hours 45m ago
       "likes": 0
     },
     {
@@ -107,7 +108,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290152413",
-      "createdAt": 1782290152413,
+      "createdAt": now - 4 * 60 * 60 * 1000, // 4 hours ago (will age to Old)
       "likes": 0
     },
     {
@@ -119,7 +120,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290014411",
-      "createdAt": 1782290014411,
+      "createdAt": now - 8 * 60 * 60 * 1000, // 8 hours ago (will age to Old)
       "likes": 0
     },
     {
@@ -131,19 +132,19 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782289521009",
-      "createdAt": 1782289521009,
+      "createdAt": now - 12 * 60 * 60 * 1000, // 12 hours ago (will age to Old)
       "likes": 0
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/C1OAPt1Q26U?list=PLi5fEbOt0If7Rky9DdZePw4wNFJVbGxt4\" title=\"১ ক্লাসেই যোগাশ্রয়ী প্রোগ্রামিং ১০০% শেষ | HSC 🔥\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
       "title": "১ ক্লাসেই যোগাশ্রয়ী প্রোগ্রামিং ১০০% শেষ | HSC 🔥",
-      "description": "ক্লাস নোট:\nhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbVhIUldpMHNkWi1GM016RThVc2RmSDkwZ2lkd3xBQ3Jtc0ttajhNMVZzdEE4SE9uQUV6S2E4QW5hZWFNUUdJTnF4S1d1eEkwM09JYU1ROGhfbWVuVm01eFlhRVpXSWVsdDJkenlDU18zZnJIVmpTOV9TbklsX08yN0lxcnZoTGFNSFhlWGtLc21EMzRCc3Z0UVNKdw&q=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1lTxIwKoLeLVJz7zLfNDEGqIEJc2KQO5X%3Fusp%3Dsharing&v=C1OAPt1Q26U",
+      "description": "ক্লাস নোট:\nhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbVhIUldpMHNkWi1GM016RThVc2RmSDkwZ2lkd3xBQ3Jtc0ttajhNMVZzdEE4SE9uQUV6S2E4QW5hZWFNUUdJTnF4S1d1eEkwM09JYU1ROGhfbWVuVm01eFlhRVpXSWVsdDJkenlDU18zZnJIVmpTOV9TbklsX08yN0lxcnZoTGFNSFhlWGtLc21EMzRCc3Z0UVNKdw&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1lTxIwKoLeLVJz7zLfNDEGqIEJc2KQO5X%3Fusp%3Dsharing&v=C1OAPt1Q26U",
       "channelName": "Rakib's Classroom - HSC",
       "channelLink": "https://www.youtube.com/@Rakibs_HSC",
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782289427873",
-      "createdAt": 1782289427873,
+      "createdAt": now - 16 * 60 * 60 * 1000, // 16 hours ago (will age to Old)
       "likes": 0
     },
     {
@@ -155,7 +156,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782289339915",
-      "createdAt": 1782289339916,
+      "createdAt": now - 24 * 60 * 60 * 1000, // 1 day ago (will age to Old)
       "likes": 0
     },
     {
@@ -167,7 +168,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782287743188",
-      "createdAt": 1782287743188,
+      "createdAt": now - 2 * 24 * 60 * 60 * 1000, // 2 days ago (will age to Old)
       "likes": 0
     },
     {
@@ -179,7 +180,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782287641873",
-      "createdAt": 1782287641873,
+      "createdAt": now - 3 * 24 * 60 * 60 * 1000, // 3 days ago (will age to Old)
       "likes": 0
     },
     {
@@ -191,7 +192,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782287519385",
-      "createdAt": 1782287519385,
+      "createdAt": now - 4 * 24 * 60 * 60 * 1000, // 4 days ago (will age to Old)
       "likes": 0
     },
     {
@@ -203,7 +204,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782287431814",
-      "createdAt": 1782287431814,
+      "createdAt": now - 5 * 24 * 60 * 60 * 1000, // 5 days ago (will age to Old)
       "likes": 0
     },
     {
@@ -215,7 +216,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782287340247",
-      "createdAt": 1782287340247,
+      "createdAt": now - 6 * 24 * 60 * 60 * 1000, // 6 days ago (will age to Old)
       "likes": 0
     },
     {
@@ -227,7 +228,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782287139005",
-      "createdAt": 1782287139005,
+      "createdAt": now - 7 * 24 * 60 * 60 * 1000, // 7 days ago (will age to Old)
       "likes": 0
     },
     {
@@ -239,7 +240,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782286733268",
-      "createdAt": 1782286733268,
+      "createdAt": now - 8 * 24 * 60 * 60 * 1000, // 8 days ago (will age to Old)
       "likes": 0
     },
     {
@@ -251,7 +252,7 @@ export const getInitialVideos = (): Video[] => {
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782286421296",
-      "createdAt": 1782286421296,
+      "createdAt": now - 9 * 24 * 60 * 60 * 1000, // 9 days ago (will age to Old)
       "likes": 0
     }
   ];
@@ -264,14 +265,14 @@ export const getInitialCourses = (): Course[] => {
       name: "HSC Math Tricks & Hacks",
       description: "Quick calculator shortcut strategies and core comprehensive syllabus guide videos on Higher Math.",
       videoIds: ["video-1782290559788", "video-1782290496208", "video-1782290422076", "video-1782290356245", "video-1782290274526", "video-1782290213569", "video-1782290152413", "video-1782290014411", "video-1782286733268", "video-1782286421296"],
-      createdAt: 1782290000000
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000 // 30 days ago
     },
     {
       id: "course-hsc-humanities-science",
       name: "HSC Bangla & English Preparation",
       description: "Full syllabus review, suggestion matrices, and writing hacks for HSC candidates.",
       videoIds: ["video-1782290744498", "video-1782287743188", "video-1782287641873", "video-1782287519385", "video-1782287431814", "video-1782287340247", "video-1782287139005"],
-      createdAt: 1782290100000
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000 // 30 days ago
     }
   ];
 };
@@ -283,7 +284,7 @@ export const getInitialComments = (): Comment[] => {
       videoId: "video-1782290612788",
       username: "Areeb",
       text: "This calculator shortcut trick is exceptionally helpful for ICT examinations! Saving this for revision.",
-      createdAt: 1782290700000
+      createdAt: Date.now() - 5 * 60 * 1000 // 5 minutes ago
     }
   ];
 };

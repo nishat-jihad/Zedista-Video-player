@@ -59,6 +59,17 @@ export default function App() {
 
   // --- MOUNT INITIALIZATION & AUTO SEEDING ---
   useEffect(() => {
+    // Safe parsing wrapper helpers
+    const safeParse = <T,>(str: string | null, fallback: T): T => {
+      if (!str) return fallback;
+      try {
+        return JSON.parse(str) as T;
+      } catch (err) {
+        console.error("Corrupted local storage JSON found:", err);
+        return fallback;
+      }
+    };
+
     // 1. Initialize Username & Profile lists
     const storedUsername = localStorage.getItem("zedistra_username") || "";
     const storedLikes = localStorage.getItem("zedistra_liked_video_ids");
@@ -67,13 +78,13 @@ export default function App() {
 
     setUsername(storedUsername);
     setTheme(storedTheme);
-    if (storedLikes) setLikedVideoIds(JSON.parse(storedLikes));
-    if (storedFavs) setFavoriteVideoIds(JSON.parse(storedFavs));
+    if (storedLikes) setLikedVideoIds(safeParse(storedLikes, []));
+    if (storedFavs) setFavoriteVideoIds(safeParse(storedFavs, []));
 
     // Apply initial theme class to HTML element
     document.documentElement.className = storedTheme === "white" ? "theme-white" : "theme-red";
 
-    // 2. Load Core Data or Seed
+    // 2. Load Core Data or Seed safely
     const storedVideos = localStorage.getItem("zedistra_videos");
     const storedCourses = localStorage.getItem("zedistra_courses");
     const storedComments = localStorage.getItem("zedistra_comments");
@@ -82,22 +93,22 @@ export default function App() {
     let loadedCourses: Course[] = [];
     let loadedComments: Comment[] = [];
 
-    if (storedVideos && JSON.parse(storedVideos).length > 0) {
-      loadedVideos = JSON.parse(storedVideos);
+    if (storedVideos !== null) {
+      loadedVideos = safeParse(storedVideos, []);
     } else {
       loadedVideos = getInitialVideos();
       localStorage.setItem("zedistra_videos", JSON.stringify(loadedVideos));
     }
 
-    if (storedCourses && JSON.parse(storedCourses).length > 0) {
-      loadedCourses = JSON.parse(storedCourses);
+    if (storedCourses !== null) {
+      loadedCourses = safeParse(storedCourses, []);
     } else {
       loadedCourses = getInitialCourses();
       localStorage.setItem("zedistra_courses", JSON.stringify(loadedCourses));
     }
 
-    if (storedComments) {
-      loadedComments = JSON.parse(storedComments);
+    if (storedComments !== null) {
+      loadedComments = safeParse(storedComments, []);
     } else {
       loadedComments = getInitialComments();
       localStorage.setItem("zedistra_comments", JSON.stringify(loadedComments));
@@ -106,7 +117,7 @@ export default function App() {
     // Load any custom empty categories
     const storedCustomCats = localStorage.getItem("zedistra_custom_empty_cats");
     if (storedCustomCats) {
-      setCustomEmptyCategories(JSON.parse(storedCustomCats));
+      setCustomEmptyCategories(safeParse(storedCustomCats, []));
     }
 
     // 3. Process Category Expiration Rules Immediately ("Recent" to "Old" after 3 hours)
