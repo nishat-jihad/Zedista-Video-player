@@ -247,6 +247,28 @@ export default function App() {
     saveVideos(updatedVideos);
   };
 
+
+  // Change video category
+  const handleChangeVideoCategory = (videoId: string, newCategory: string) => {
+    const updatedVideos = videos.map((v) => {
+      if (v.id === videoId) {
+        return { ...v, category: newCategory };
+      }
+      return v;
+    });
+    saveVideos(updatedVideos);
+    const builtIn = ["All", "Recent", "Old", "Favorites"];
+    if (!builtIn.includes(newCategory)) {
+      const storedCats = localStorage.getItem("zedistra_custom_empty_cats");
+      const existing: string[] = storedCats ? JSON.parse(storedCats) : [];
+      if (!existing.includes(newCategory)) {
+        const updatedCats = [...existing, newCategory];
+        setCustomEmptyCategories(updatedCats);
+        localStorage.setItem("zedistra_custom_empty_cats", JSON.stringify(updatedCats));
+      }
+    }
+  };
+
   // Triggering watch page edit details form directly from Feed
   const handleTriggerEditVideoFromFeed = (video: Video) => {
     setSelectedVideoId(video.id);
@@ -506,7 +528,7 @@ export default function App() {
       />
 
       {/* 3. Main Stage Content Panel */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 pb-20">
+      <main className="flex-1 max-w-screen-xl w-full mx-auto px-3 sm:px-5 lg:px-8 py-6 pb-20">
         
         {/* --- VIEW FEED HOME STAGE --- */}
         {currentView === "feed" && (
@@ -620,7 +642,7 @@ export default function App() {
                 )}
               </div>
             ) : (
-              <div id="feed-videos-grid" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div id="feed-videos-grid" className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-6">
                 {currentFilteredVideos.map((video) => (
                   <VideoCard
                     key={video.id}
@@ -633,6 +655,7 @@ export default function App() {
                     onToggleFavorite={handleToggleFavorite}
                     onAddVideoToCourse={handleAddVideoToCourse}
                     onCreateCourseWithVideo={handleCreateCourseWithVideo}
+                    onChangeVideoCategory={handleChangeVideoCategory}
                   />
                 ))}
               </div>
