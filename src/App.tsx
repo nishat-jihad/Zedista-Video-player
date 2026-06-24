@@ -7,7 +7,8 @@ import {
   ListRestart, 
   Play, 
   Compass,
-  Star
+  Star,
+  RefreshCw
 } from "lucide-react";
 
 import { Video, Comment, Course, UserProfile } from "./types";
@@ -631,20 +632,40 @@ export default function App() {
             {currentFilteredVideos.length === 0 ? (
               <div id="feed-empty-state" className="p-16 text-center border border-dashed border-border-custom rounded-2xl bg-bg-card">
                 <Compass className="w-12 h-12 text-neutral-300 mx-auto mb-3 animate-pulse" strokeWidth={1} />
-                <h3 className="font-bold text-sm text-neutral-800">No Video Clips Cataloged</h3>
-                <p className="text-xs text-neutral-500 max-w-sm mx-auto mt-1">
-                  {activeCategory === "Favorites" 
-                    ? "You haven't saved any video items to your Favorites list yet. Click a video and star it to save!"
-                    : "No lectures matched your search filters. Publish standard iframe files or create customized video files using the upload manager above."}
+                <h3 className="font-bold text-sm text-neutral-800">
+                  {videos.length === 0 ? "Study Catalog is Empty" : "No Video Clips Cataloged"}
+                </h3>
+                <p className="text-xs text-neutral-500 max-w-sm mx-auto mt-1 leading-relaxed">
+                  {videos.length === 0 
+                    ? "Your local catalog is currently empty. You can restore the pre-loaded HSC test prep and calculator hack lectures with one click!"
+                    : activeCategory === "Favorites" 
+                      ? "You haven't saved any video items to your Favorites list yet. Click a video and star it to save!"
+                      : "No lectures matched your search filters. Publish standard iframe files or create customized video files using the upload manager above."}
                 </p>
-                {activeCategory !== "All" && (
+                {videos.length === 0 ? (
                   <button
-                    id="feed-reset-cat-btn"
-                    onClick={() => setActiveCategory("All")}
-                    className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg shadow hover:shadow-md transition-colors cursor-pointer"
+                    id="feed-restore-btn"
+                    onClick={() => {
+                      const initial = getInitialVideos();
+                      setVideos(initial);
+                      localStorage.setItem("zedistra_videos", JSON.stringify(initial));
+                      setActiveCategory("All");
+                    }}
+                    className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg shadow hover:shadow-md transition-all cursor-pointer inline-flex items-center gap-1.5"
                   >
-                    Reset Categories
+                    <RefreshCw className="w-3.5 h-3.5" />
+                    <span>Restore Default Lectures</span>
                   </button>
+                ) : (
+                  activeCategory !== "All" && (
+                    <button
+                      id="feed-reset-cat-btn"
+                      onClick={() => setActiveCategory("All")}
+                      className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-lg shadow hover:shadow-md transition-colors cursor-pointer"
+                    >
+                      Reset Categories
+                    </button>
+                  )
                 )}
               </div>
             ) : (
