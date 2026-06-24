@@ -252,7 +252,7 @@ export default function CourseSection({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Left Col: Course summary info */}
-        <div className="lg:col-span-1 bg-gradient-to-b from-neutral-900 to-neutral-800 text-white p-6 rounded-2xl shadow-xl flex flex-col justify-between self-start sticky top-20">
+        <div className="lg:col-span-1 bg-gradient-to-b from-neutral-900 to-neutral-800 text-white p-6 rounded-2xl shadow-xl flex flex-col justify-between self-start lg:sticky lg:top-20">
           <div className="space-y-4">
             <div className="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md">
               <BookOpen className="w-6 h-6" />
