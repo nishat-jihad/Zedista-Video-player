@@ -134,7 +134,7 @@ export default function Navbar({
           <button
             id="nav-courses-btn"
             onClick={() => onNavigate("courses")}
-            className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-main transition-colors cursor-pointer relative group flex items-center justify-center"
+            className="hidden sm:flex p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-main transition-colors cursor-pointer relative group items-center justify-center"
             aria-label="Courses & Playlists"
           >
             <BookOpen className="w-5 h-5" strokeWidth={1.8} />
@@ -155,7 +155,7 @@ export default function Navbar({
                 if (favoritesBtn) favoritesBtn.click();
               }, 50);
             }}
-            className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-main transition-colors cursor-pointer relative group flex items-center justify-center"
+            className="hidden sm:flex p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-main transition-colors cursor-pointer relative group items-center justify-center"
             aria-label="Favorites"
           >
             <Star className="w-5 h-5" strokeWidth={1.8} />
@@ -168,7 +168,7 @@ export default function Navbar({
           <button
             id="nav-backup-btn"
             onClick={() => onNavigate("backup")}
-            className="p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-main transition-colors cursor-pointer relative group flex items-center justify-center"
+            className="hidden sm:flex p-2 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-main transition-colors cursor-pointer relative group items-center justify-center"
             aria-label="Backup"
           >
             <Database className="w-5 h-5" strokeWidth={1.8} />
@@ -195,7 +195,7 @@ export default function Navbar({
           </button>
 
           {/* Separator */}
-          <div className="h-6 w-[1px] bg-border-custom hidden xs:block" />
+          <div className="h-6 w-[1px] bg-border-custom hidden sm:block" />
 
           {/* 3-Dot Icon on Top Right to Open Left Slidebar */}
           <button
