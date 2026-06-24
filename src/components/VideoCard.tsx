@@ -99,7 +99,7 @@ export default function VideoCard({
   return (
     <div 
       id={`video-card-${video.id}`}
-      className="group relative flex flex-col bg-transparent w-full transition-all duration-300"
+      className="group relative flex flex-col bg-transparent w-full transition-all duration-300 px-1 sm:px-2"
     >
       {/* Thumbnail */}
       <div 
@@ -132,7 +132,7 @@ export default function VideoCard({
       </div>
 
       {/* Description / Content Details */}
-      <div className="pt-3 pb-1 flex gap-3 flex-1 w-full">
+      <div className="pt-3 pb-2 flex gap-3 flex-1 w-full">
         {/* Channel Profile Picture / Initial Circle */}
         <div className="w-9 h-9 rounded-full bg-neutral-100 dark:bg-neutral-800 flex-shrink-0 border border-border-custom overflow-hidden">
           <img 
