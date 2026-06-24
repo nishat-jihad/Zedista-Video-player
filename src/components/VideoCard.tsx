@@ -11,7 +11,7 @@ import {
   FolderPlus
 } from "lucide-react";
 import { Video, Course } from "../types";
-import { extractYouTubeId, formatRelativeTime, getChannelAvatarUrl } from "../utils/videoUtils";
+import { extractYouTubeId, formatRelativeTime, getChannelAvatarUrl, getVideoDuration } from "../utils/videoUtils";
 
 interface VideoCardProps {
   key?: string;
@@ -161,7 +161,7 @@ export default function VideoCard({
         {/* Thumbnail Overlays */}
         <div className="absolute bottom-2 right-2 flex items-center space-x-1.5 bg-black/75 px-2 py-0.5 rounded text-[10px] font-semibold text-white tracking-wide">
           <Clock className="w-3 h-3" />
-          <span>{formatRelativeTime(video.createdAt)}</span>
+          <span>{getVideoDuration(video)}</span>
         </div>
       </div>
 

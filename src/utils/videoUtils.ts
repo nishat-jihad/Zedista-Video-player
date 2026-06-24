@@ -272,3 +272,67 @@ export function formatRelativeTime(timestamp: number): string {
   const months = Math.floor(days / 30);
   return `${months} ${months === 1 ? "month" : "months"} ago`;
 }
+
+/**
+ * Resolves a stable video duration (e.g. "12:34" or "1:15:20") for a given video.
+ * If the video object has a pre-defined duration, it uses that.
+ * Otherwise, it generates a stable mock duration based on the video's ID or title,
+ * or parses timestamps from description if any.
+ */
+export function getVideoDuration(video: Video): string {
+  if (video.duration) {
+    return video.duration;
+  }
+
+  // Parse description for a potential max timestamp (to simulate actual video length)
+  const timestampRegex = /\b(?:(\d{1,2}):)?(\d{1,2}):(\d{2})\b/g;
+  let matches;
+  let maxSeconds = 0;
+
+  while ((matches = timestampRegex.exec(video.description)) !== null) {
+    const hrs = matches[1] ? parseInt(matches[1], 10) : 0;
+    const mins = parseInt(matches[2], 10);
+    const secs = parseInt(matches[3], 10);
+    const totalSecs = hrs * 3600 + mins * 60 + secs;
+    if (totalSecs > maxSeconds) {
+      maxSeconds = totalSecs;
+    }
+  }
+
+  if (maxSeconds > 0) {
+    // Add 3 minutes to latest description timestamp to simulate video duration
+    const durationSecs = maxSeconds + 180;
+    const h = Math.floor(durationSecs / 3600);
+    const m = Math.floor((durationSecs % 3600) / 60);
+    const s = durationSecs % 60;
+    const sStr = s < 10 ? `0${s}` : `${s}`;
+    if (h > 0) {
+      const mStr = m < 10 ? `0${m}` : `${m}`;
+      return `${h}:${mStr}:${sStr}`;
+    } else {
+      return `${m}:${sStr}`;
+    }
+  }
+
+  // Fallback to stable generated duration from video ID hash
+  let hash = 0;
+  const str = video.id + video.title;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  hash = Math.abs(hash);
+
+  // Generate minutes between 3 and 85, and seconds between 0 and 59
+  const mins = 3 + (hash % 83);
+  const secs = hash % 60;
+  const secsStr = secs < 10 ? `0${secs}` : `${secs}`;
+  
+  if (mins >= 60) {
+    const hrs = Math.floor(mins / 60);
+    const remainingMins = mins % 60;
+    const minsStr = remainingMins < 10 ? `0${remainingMins}` : `${remainingMins}`;
+    return `${hrs}:${minsStr}:${secsStr}`;
+  }
+  
+  return `${mins}:${secsStr}`;
+}

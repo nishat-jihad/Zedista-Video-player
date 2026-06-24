@@ -9,6 +9,7 @@ export interface Video {
   originalCategory: string; // The category it was originally uploaded to
   createdAt: number; // timestamp in ms
   likes: number;
+  duration?: string;
 }
 
 export interface Comment {
