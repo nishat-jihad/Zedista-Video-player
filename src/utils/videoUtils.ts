@@ -56,17 +56,17 @@ export function getEmbedHtml(urlOrEmbed: string): string {
 
   let trimmed = urlOrEmbed.trim();
 
-  // Helper to clean URL parameters
+  // Helper to clean ONLY mute/muted params — NOT autoplay, which browsers need for permission
   const cleanUrlParams = (url: string): string => {
     try {
       const hasNoProtocol = url.startsWith("//");
       const urlToParse = hasNoProtocol ? "https:" + url : url;
       const parsedUrl = new URL(urlToParse);
-      
+
+      // Only remove mute/muted — keep autoplay intact so browser audio policy is respected
       parsedUrl.searchParams.delete("mute");
       parsedUrl.searchParams.delete("muted");
-      parsedUrl.searchParams.delete("autoplay");
-      
+
       let finalUrl = parsedUrl.toString();
       if (hasNoProtocol && finalUrl.startsWith("https://")) {
         finalUrl = finalUrl.substring(6);
@@ -74,7 +74,6 @@ export function getEmbedHtml(urlOrEmbed: string): string {
       return finalUrl;
     } catch (e) {
       let clean = url;
-      clean = clean.replace(/([?&])autoplay=[^&]*/gi, "");
       clean = clean.replace(/([?&])mute=[^&]*/gi, "");
       clean = clean.replace(/([?&])muted=[^&]*/gi, "");
       clean = clean.replace(/&&+/g, "&").replace(/\?&/g, "?").replace(/[?&]$/g, "");
@@ -82,16 +81,15 @@ export function getEmbedHtml(urlOrEmbed: string): string {
     }
   };
 
-  // If it's already an iframe, clean its src and return it (making sure it fits full width)
+  // If it's already an iframe, clean its src and return it
   if (trimmed.startsWith("<iframe")) {
     let clean = trimmed;
-    
-    // Remove any literal 'muted' or 'mute' or 'autoplay' attributes on the iframe tag itself
+
+    // Remove 'muted' attribute from iframe tag (but NOT autoplay — keep audio working)
     clean = clean.replace(/\bmuted\b/gi, "");
-    clean = clean.replace(/\bautoplay\b/gi, "");
-    clean = clean.replace(/\b(muted|mute|autoplay)=["'][^"']*["']/gi, "");
-    
-    // Extract src attribute and clean it
+    clean = clean.replace(/\b(muted|mute)=["'][^"']*["']/gi, "");
+
+    // Extract src attribute and clean it (remove mute/muted only)
     const srcMatch = clean.match(/src=["']([^"']+)["']/i);
     if (srcMatch && srcMatch[1]) {
       const originalSrc = srcMatch[1];
@@ -105,46 +103,50 @@ export function getEmbedHtml(urlOrEmbed: string): string {
       clean = clean.replace(/width=["']\d+["']/gi, 'width="100%"');
       clean = clean.replace(/height=["']\d+["']/gi, 'height="100%"');
     }
-    
+
     if (!clean.toLowerCase().includes("allowfullscreen")) {
       clean = clean.replace(">", " allowfullscreen>");
     }
 
-    // Ensure allow attribute does not prevent sound or autoplay permission
+    // Ensure allow attribute includes all needed permissions for audio/video
     if (!clean.toLowerCase().includes("allow=")) {
-      clean = clean.replace("<iframe", '<iframe allow="autoplay; encrypted-media; picture-in-picture"');
+      clean = clean.replace("<iframe", '<iframe allow="autoplay; encrypted-media; picture-in-picture; fullscreen"');
     } else {
-      if (!clean.toLowerCase().includes("autoplay")) {
-        clean = clean.replace(/allow=["']([^"']+)["']/i, (match, p1) => {
-          return `allow="${p1}; autoplay; encrypted-media; picture-in-picture"`;
-        });
-      }
+      // Make sure autoplay and encrypted-media are in the allow attribute
+      clean = clean.replace(/allow=["']([^"']+)["']/i, (match, p1) => {
+        let perms = p1;
+        if (!perms.toLowerCase().includes("autoplay")) perms += "; autoplay";
+        if (!perms.toLowerCase().includes("encrypted-media")) perms += "; encrypted-media";
+        if (!perms.toLowerCase().includes("picture-in-picture")) perms += "; picture-in-picture";
+        return `allow="${perms}"`;
+      });
     }
+
+    // Remove any sandbox attribute that would block audio
+    clean = clean.replace(/\bsandbox=["'][^"']*["']/gi, "");
+
     return clean;
   }
 
   // Handle YouTube links
   const ytId = extractYouTubeId(trimmed);
   if (ytId) {
-    // Generate clean embed link without autoplay or mute parameters
     return `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${ytId}?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="w-full h-full rounded-lg shadow-sm"></iframe>`;
   }
 
   // Handle Vimeo links
   const vimeoId = extractVimeoId(trimmed);
   if (vimeoId) {
-    // Generate clean embed link without autoplay or mute parameters
     return `<iframe width="100%" height="100%" src="https://player.vimeo.com/video/${vimeoId}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="w-full h-full rounded-lg shadow-sm"></iframe>`;
   }
 
   // Handle direct video files (.mp4, .webm, .ogg)
   const isDirectVideo = /\.(mp4|webm|ogg)(\?.*)?$/i.test(trimmed);
   if (isDirectVideo) {
-    // Return standard video tag without muted attribute
     return `<video controls class="w-full h-full rounded-lg shadow-sm bg-black" src="${trimmed}"></video>`;
   }
 
-  // Fallback: If it's a regular URL, try to frame it (cleaning its query parameters first)
+  // Fallback: If it's a regular URL, try to frame it
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
     const cleanedUrl = cleanUrlParams(trimmed);
     return `<iframe width="100%" height="100%" src="${cleanedUrl}" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen class="w-full h-full rounded-lg shadow-sm"></iframe>`;
@@ -156,7 +158,6 @@ export function getEmbedHtml(urlOrEmbed: string): string {
 
 /**
  * Gets a video thumbnail URL.
- * If YouTube, retrieves the actual thumbnail. Otherwise, returns a high-quality stylized gradient placeholder.
  */
 export function getVideoThumbnail(urlOrEmbed: string, seedIndex: number = 0): string {
   const ytId = extractYouTubeId(urlOrEmbed);
@@ -172,69 +173,56 @@ export function getVideoThumbnail(urlOrEmbed: string, seedIndex: number = 0): st
     "from-amber-500 to-red-500"
   ];
   const selectedGradient = gradients[seedIndex % gradients.length];
-  
-  // Return a CSS background gradient string pattern or we can handle it in the React rendering side.
-  // We can return a special prefix to indicate to our components to render a rich dynamic gradient thumbnail!
   return `gradient:${selectedGradient}`;
 }
 
 /**
  * Deterministically generates or resolves a channel avatar picture.
- * If a channel link exists, tries to resolve the avatar via unavatar.io.
- * Otherwise, generates a polished UI avatar.
  */
 export function getChannelAvatarUrl(channelLink: string | undefined, channelName: string): string {
   const defaultAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(channelName || "V")}&background=E11D48&color=ffffff&size=128&bold=true`;
-  
+
   if (!channelLink) {
     return defaultAvatar;
   }
-  
+
   const trimmed = channelLink.trim();
   if (!trimmed) {
     return defaultAvatar;
   }
-  
-  // Try to extract YouTube handle
+
   const handleMatch = trimmed.match(/@([\w\.\-]+)/);
   if (handleMatch && handleMatch[1]) {
     return `https://unavatar.io/youtube/${handleMatch[1]}`;
   }
-  
-  // Try standard channel path
+
   const cMatch = trimmed.match(/youtube\.com\/(c|user|channel)\/([\w\.\-]+)/);
   if (cMatch && cMatch[2]) {
     return `https://unavatar.io/youtube/${cMatch[2]}`;
   }
-  
-  // If it is just a username/handle directly
+
   if (trimmed.startsWith("@")) {
     return `https://unavatar.io/youtube/${trimmed.substring(1)}`;
   }
-  
-  // If it is a direct https link to an image, return it
+
   if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
     if (/\.(jpg|jpeg|png|webp|gif|svg)/i.test(trimmed)) {
       return trimmed;
     }
   }
-  
-  // General fallback
+
   return defaultAvatar;
 }
 
 /**
  * Processes videos to check and handle the "category expiration" rule.
- * "Videos move from 'Recent' to 'Old' category after 3 hours."
- * Returns updated videos array and boolean indicating if any video was updated.
  */
 export function processCategoryAging(videos: Video[]): { updatedVideos: Video[]; hasChanges: boolean } {
   let hasChanges = false;
-  const THREE_HOURS = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
+  const THREE_HOURS = 3 * 60 * 60 * 1000;
   const now = Date.now();
 
   const updatedVideos = videos.map((video) => {
-    // Check if the video is in 'Recent' and has been there for more than 3 hours
     if (video.category === "Recent" && now - video.createdAt > THREE_HOURS) {
       hasChanges = true;
       return {
@@ -249,7 +237,7 @@ export function processCategoryAging(videos: Video[]): { updatedVideos: Video[];
 }
 
 /**
- * Formats timestamps to friendly relative time (e.g. "3 hours ago", "2 days ago")
+ * Formats timestamps to friendly relative time.
  */
 export function formatRelativeTime(timestamp: number): string {
   const now = Date.now();
