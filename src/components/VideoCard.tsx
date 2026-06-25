@@ -159,8 +159,8 @@ export default function VideoCard({
         )}
 
         {/* Thumbnail Overlays */}
-        <div className="absolute bottom-2 right-2 flex items-center space-x-1 bg-black/80 px-2 py-1 rounded text-xs font-medium text-white shadow-sm">
-          <Clock className="w-3.5 h-3.5 text-white" />
+        <div className="absolute bottom-2 right-2 flex items-center space-x-1 bg-black/80 px-2.5 py-1 rounded text-sm font-semibold text-white shadow-sm">
+          <Clock className="w-4 h-4 text-white" />
           <span>{getVideoDuration(video)}</span>
         </div>
       </div>

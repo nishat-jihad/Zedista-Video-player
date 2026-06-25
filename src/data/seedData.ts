@@ -6,14 +6,15 @@ export const getInitialVideos = (): Video[] => {
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/QWJb6-jFT3w\" title=\"HSC 2026 বাংলা রচনা সাজেশন | মাত্র ৫টি রচনা পড়লেই কি ১০০% কমন?\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
       "title": "HSC 2026 বাংলা রচনা সাজেশন | মাত্র ৫টি রচনা পড়লেই কি ১০০% কমন?",
-      "description": "HSC 2026 ব্যাচের সবার জন্য — বাংলা রচনা নিয়ে আর টেনশন নয়! 🎯\nপুরো সিলেবাসের সব রচনা মুখস্থ করা প্রায় অসম্ভব, আর দরকারও নেই। এই ভিডিওতে Shakib Sir (Fahad's Tutorial) সবচেয়ে গুরুত্বপূর্ণ এবং বারবার কমন পড়া এমন ৫ ধরনের রচনা নিয়ে আলোচনা করেছেন, যেগুলো ঠিকভাবে আয়ত্ত করলে অল্প পড়েই বেশি কমন পাওয়া সম্ভব।\nএই ভিডিওতে যা যা পাবে:\n\n✅ HSC 2026 এর জন্য সবচেয়ে সম্ভাবনাময় ৫টি রচনা\n✅ কোন রচনা আগে পড়বে আর কোনটা পরে — সঠিক প্রায়োরিটি\n✅ পরীক্ষায় ভালো মার্কস পেতে রচনা গুছিয়ে লেখার কৌশল\n✅ শেষ মুহূর্তের প্রস্তুতির স্মার্ট টিপস",
+      "description": "HSC 2026 ব্যাচের সবার জন্য — বাংলা রচনা নিয়ে আর টেনশন নয়! 🎯\nপুরো সিলেবাসের সব রচনা মুখস্থ করা প্রায় অসম্ভব, আর দরকারও নেই। এই ভিডিওতে Shakib Sir (Fahad's Tutorial) সবচেয়ে গুরুত্বপূর্ণ এবং বারবার কমন পড়া এমন ৫ ধরনের রচনা নিয়ে আলোচনা করেছেন, যেগুলো ঠিকভাবে আয়ত্ত করলে অল্প পড়েই বেশি কমন পাওয়া সম্ভব।\nএই ভিডিওতে যা যা পাবে:\n\n✅ HSC 2026 এর জন্য সবচেয়ে সম্ভাবময় ৫টি রচনা\n✅ কোন রচনা আগে পড়বে আর কোনটা পরে — সঠিক প্রায়োরিটি\n✅ পরীক্ষায় ভালো মার্কস পেতে রচনা গুছিয়ে লেখার কৌশল\n✅ শেষ মুহূর্তের প্রস্তুতির স্মার্ট টিপস",
       "channelName": "Rakib's Classroom - HSC",
       "channelLink": "https://www.youtube.com/@Rakibs_HSC",
       "category": "Recent",
       "originalCategory": "Recent",
       "id": "video-1782290744498",
       "createdAt": now - 10 * 60 * 1000, // 10 minutes ago
-      "likes": 0
+      "likes": 0,
+      "duration": "12:15"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/Rbsj9_40-bA?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ICT Chapter 3 Calculator Hacks - ক্যাল্কুলেটরেই সব MCQ! 🔥\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -25,7 +26,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290612788",
       "createdAt": now - 25 * 60 * 1000, // 25 minutes ago
-      "likes": 0
+      "likes": 0,
+      "duration": "2:08:45"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/wY9tfRNjzqU?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ভেক্টর - Vector - ক্যালকুলেটর হ্যাক্স - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -37,7 +39,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290559788",
       "createdAt": now - 40 * 60 * 1000, // 40 minutes ago
-      "likes": 0
+      "likes": 0,
+      "duration": "58:24"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/k7sgHtBWSEM?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"যোগজীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -49,7 +52,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290496208",
       "createdAt": now - 55 * 60 * 1000, // 55 minutes ago
-      "likes": 0
+      "likes": 0,
+      "duration": "34:12"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/ld0g2bj6esQ?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"অন্টারীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -61,7 +65,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290422076",
       "createdAt": now - 75 * 60 * 1000, // 1 hour 15m ago
-      "likes": 0
+      "likes": 0,
+      "duration": "1:18:45"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/QYIw6Pg_VXE?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"বিপরীত ত্রিকোণমিতির সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -73,7 +78,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290356245",
       "createdAt": now - 105 * 60 * 1000, // 1 hour 45m ago
-      "likes": 0
+      "likes": 0,
+      "duration": "1:08:15"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/614V4t76tss?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"বহুপদী সমীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -85,11 +91,12 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290274526",
       "createdAt": now - 135 * 60 * 1000, // 2 hours 15m ago
-      "likes": 0
+      "likes": 0,
+      "duration": "1:15:40"
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/MX1re8Iql0Y?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"জटिल সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই  - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "জटिल সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
+      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/MX1re8Iql0Y?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"জটীল সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই  - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "title": "জটিল সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
       "description": "0:58 -  ES Plus Series\n21:25 - Ex Series\n34:35 - CW Series\n52:00 Common For all Calculator\n\n44:50 এখানে (CW Calculator) মডুলাস আর আর্গুমেন্ট অন্যভাবেও বের করা যায়। জটিল সংখ্যাটি তুলে EXE তে চাপ দেওয়ার পর Format বাটনে ক্লিক করলে Polar Coord নামে একটা অপশন আসে। ঐখানে চাপ দিলে মডুলাস আর আর্গুমেন্ট একসাথেই এসে পড়ে অন্য ক্যালকুলেটর গুলার মতো। তাহলে আর কষ্ট করে বের করতে হয় না। আর Rectangular Coord এ চাপ দিলে a+bi আকারে আসে।",
       "channelName": "Rakib's Classroom - HSC",
       "channelLink": "https://www.youtube.com/@Rakibs_HSC",
@@ -97,7 +104,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290213569",
       "createdAt": now - 165 * 60 * 1000, // 2 hours 45m ago
-      "likes": 0
+      "likes": 0,
+      "duration": "56:50"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/ZiquEjEEidY?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ত্রিকোণমিতির সব MCQ করে ফেলো ক্যাল্কুলেটরেই  - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -109,7 +117,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290152413",
       "createdAt": now - 4 * 60 * 60 * 1000, // 4 hours ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "1:16:30"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/vqUuah_v9w0?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ম্যাট্রিক্স ও নির্ণায়কের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -121,7 +130,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782290014411",
       "createdAt": now - 8 * 60 * 60 * 1000, // 8 hours ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "54:10"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/yO-qpIO6rQU?list=PLi5fEbOt0If7Rky9DdZePw4wNFJVbGxt4\" title=\"এক ক্লাসেই জটিল সংখ্যা ১০০% কাভার - Complex Number | HSC\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -133,7 +143,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782289521009",
       "createdAt": now - 12 * 60 * 60 * 1000, // 12 hours ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "2:45:15"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/C1OAPt1Q26U?list=PLi5fEbOt0If7Rky9DdZePw4wNFJVbGxt4\" title=\"১ ক্লাসেই যোগাশ্রয়ী প্রোগ্রামিং ১০০% শেষ | HSC 🔥\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -145,7 +156,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782289427873",
       "createdAt": now - 16 * 60 * 60 * 1000, // 16 hours ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "1:38:20"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/dxU1TOy9jvM?list=PLi5fEbOt0If7Rky9DdZePw4wNFJVbGxt4\" title=\"বিপরীত ত্রিকোণমিতি - Inverse Trigonometry Oneshot Class!\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -157,7 +169,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782289339915",
       "createdAt": now - 24 * 60 * 60 * 1000, // 1 day ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "2:12:40"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/nK0yjjK37cQ?list=PLi5fEbOt0If7GPA9drHO5PKkLY81VE\" title=\"বাংলা ১ম পত্র MCQ ম্যারাথন ক্লাস — সর্বোচ্চ কমন পাওয়ার সম্ভাবনা 🔥|| Omar Faruq Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -169,7 +182,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782287743188",
       "createdAt": now - 2 * 24 * 60 * 60 * 1000, // 2 days ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "3:04:10"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/txl2S89xwnw?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই বাংলা ১ম পত্র (বাংলা সহপাঠ) ১০০% কভার 🔥 — HSC Bangla 1st Paper One Shot | Omar Faruq Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -181,7 +195,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782287641873",
       "createdAt": now - 3 * 24 * 60 * 60 * 1000, // 3 days ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "2:15:30"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/RI1y7DxcT70?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই ইংরেজি ২য় পত্র ১০০% কমপ্লিট 🔥 — English 2nd Paper One Shot | Mir MD Jalal Sumon Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -193,7 +208,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782287519385",
       "createdAt": now - 4 * 24 * 60 * 60 * 1000, // 4 days ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "3:52:15"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/sSWsrnn0qa0?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই বাংলা ২য় পত্র ১০০% কভার 🔥 — HSC Bangla 2nd Paper One Shot | Omar Faruq Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -205,7 +221,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782287431814",
       "createdAt": now - 5 * 24 * 60 * 60 * 1000, // 5 days ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "2:38:10"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/jegosLHD8vs?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই ইংরেজি ১ম পত্র ১০০% কমপ্লিট 🔥 — English 1st Paper HSC One Shot | Mir MD Jalal Sumon Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -217,7 +234,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782287340247",
       "createdAt": now - 6 * 24 * 60 * 60 * 1000, // 6 days ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "3:14:20"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/L_TDshu8WLs?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই বাংলা ১ম পত্র (গদ্য+পদ্য) ১০০% কভার 🔥 — HSC Bangla 1st Paper One Shot | Omar Faruq Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -229,7 +247,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782287139005",
       "createdAt": now - 7 * 24 * 60 * 60 * 1000, // 7 days ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "4:28:45"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/JA7J7vMF1hk\" title=\"অন্টারীকরণ HSC🔥CQ Shot Series || Higher Math 1st Paper Chapter 9 | Differentiation\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -241,7 +260,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782286733268",
       "createdAt": now - 8 * 24 * 60 * 60 * 1000, // 8 days ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "1:12:10"
     },
     {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/DKSpBV109fE\" title=\"১ ক্লাসেই অন্তরীকরণ ১০০% শেষ - Differentiation | HSC\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
@@ -253,7 +273,8 @@ export const getInitialVideos = (): Video[] => {
       "originalCategory": "Recent",
       "id": "video-1782286421296",
       "createdAt": now - 9 * 24 * 60 * 60 * 1000, // 9 days ago (will age to Old)
-      "likes": 0
+      "likes": 0,
+      "duration": "2:48:30"
     }
   ];
 };
