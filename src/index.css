@@ -39,13 +39,13 @@
 .theme-red {
   --primary: #ef4444;
   --primary-hover: #dc2626;
-  --bg-app: #0c0404; /* Beautiful dark wine/black */
-  --bg-card: #140808;
-  --border-custom: #2a1212;
-  --text-main: #fcf4f4;
+  --bg-app: #1a0000; /* Deep dark red */
+  --bg-card: #2a0505; /* Dark red card */
+  --border-custom: #5a1a1a; /* Red-tinted border */
+  --text-main: #fff1f1;
   --text-sub: #fca5a5;
-  --navbar-bg: #140808;
-  --navbar-text: #fcf4f4;
+  --navbar-bg: #2a0505;
+  --navbar-text: #fff1f1;
 }
 
 body {
