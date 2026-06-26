@@ -148,6 +148,27 @@ export default function WatchPage({
     };
   }, []);
 
+  // Convert "1:23" or "1:23:45" to seconds
+  const timestampToSeconds = (ts: string): number => {
+    const parts = ts.split(":").map(Number);
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    return 0;
+  };
+
+  // Seek YouTube iframe to given timestamp
+  const handleSeekToTimestamp = (timestamp: string) => {
+    if (timestamp === "--:--") return;
+    const seconds = timestampToSeconds(timestamp);
+    const ytId = extractYouTubeId(activeVideo.embedCode);
+    if (ytId) {
+      const iframe = document.querySelector("#watch-page-container iframe") as HTMLIFrameElement;
+      if (iframe) {
+        iframe.src = `https://www.youtube.com/embed/${ytId}?start=${seconds}&autoplay=1&rel=0`;
+      }
+    }
+  };
+
   const handleAddNote = (e: React.FormEvent) => {
     e.preventDefault();
     if (!noteText.trim()) return;
@@ -469,17 +490,21 @@ export default function WatchPage({
                       {notes.map((note) => (
                         <div
                           key={note.id}
-                          className="flex items-start gap-2.5 bg-white dark:bg-neutral-800 border border-border-custom rounded-lg px-3 py-2.5 group"
+                          className="flex items-start gap-2.5 bg-white dark:bg-neutral-800 border border-border-custom rounded-lg px-3 py-2.5"
                         >
-                          <span className="flex-shrink-0 text-[11px] font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-1.5 py-0.5 rounded mt-0.5">
+                          <button
+                            onClick={() => handleSeekToTimestamp(note.timestamp)}
+                            className="flex-shrink-0 text-[11px] font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-1.5 py-0.5 rounded mt-0.5 hover:bg-amber-200 dark:hover:bg-amber-800/50 cursor-pointer transition-colors"
+                            title="এই সময়ে jump করো"
+                          >
                             {note.timestamp}
-                          </span>
+                          </button>
                           <p className="flex-1 text-xs text-text-main leading-relaxed break-words">
                             {note.text}
                           </p>
                           <button
                             onClick={() => handleDeleteNote(note.id)}
-                            className="flex-shrink-0 opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/30 text-red-400 hover:text-red-600 cursor-pointer transition-all"
+                            className="flex-shrink-0 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/30 text-red-400 hover:text-red-600 cursor-pointer transition-all"
                             title="Note মুছে ফেলো"
                           >
                             <X className="w-3.5 h-3.5" />
