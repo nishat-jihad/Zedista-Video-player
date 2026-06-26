@@ -157,10 +157,7 @@ export default function VideoCard({
           </div>
         )}
 
-        {/* Thumbnail Overlays */}
-        <div className="absolute bottom-2 right-2 flex items-center bg-black/80 px-2.5 py-1 rounded text-sm font-semibold text-white shadow-sm">
-          <span>{getVideoDuration(video)}</span>
-        </div>
+        {/* Thumbnail Overlays removed - no duration badge */}
       </div>
 
       {/* Description / Content Details */}
@@ -183,7 +180,7 @@ export default function VideoCard({
           <div className="flex justify-between items-start gap-1">
             <h3 
               onClick={() => onPlayVideo(video.id)}
-              className="text-base font-semibold leading-snug line-clamp-2 cursor-pointer text-text-main hover:text-red-600 transition-colors"
+              className="text-lg font-semibold leading-snug line-clamp-2 cursor-pointer text-text-main hover:text-red-600 transition-colors"
               title={video.title}
             >
               {video.title}
@@ -377,11 +374,11 @@ export default function VideoCard({
           </div>
         </div>
 
-          <p className="text-sm text-text-sub mt-1 truncate" title={video.channelName}>
+          <p className="text-base text-text-sub mt-1 truncate" title={video.channelName}>
             {video.channelName || "Creator"}
           </p>
 
-          <div className="flex items-center space-x-1.5 text-sm text-text-sub mt-0.5 font-normal">
+          <div className="flex items-center space-x-1.5 text-base text-text-sub mt-0.5 font-normal">
             <span>{video.likes} likes</span>
             <span>•</span>
             <span>{formatRelativeTime(video.createdAt)}</span>
