@@ -12,11 +12,38 @@ import {
   Edit, 
   Trash2,
   X,
-  FileText
+  FileText,
+  BookOpen,
+  Plus,
+  Clock,
+  StickyNote
 } from "lucide-react";
-import { Video, Comment, Course } from "../types";
+import { Video, Comment, Course, VideoNote } from "../types";
 import { getEmbedHtml, formatRelativeTime, extractYouTubeId, getChannelAvatarUrl, getVideoDuration } from "../utils/videoUtils";
 import CommentSection from "./CommentSection.tsx";
+
+// Renders description text with clickable hyperlinks
+function renderDescriptionWithLinks(text: string) {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  const parts = text.split(urlRegex);
+  return parts.map((part, i) => {
+    if (urlRegex.test(part)) {
+      return (
+        <a
+          key={i}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:text-blue-600 underline break-all"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {part}
+        </a>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
 
 const VideoPlayer = React.memo(({ embedCode }: { embedCode: string }) => {
   return (
@@ -71,6 +98,13 @@ export default function WatchPage({
   const [showWatchMenu, setShowWatchMenu] = useState(false);
   const [mobileCommentsExpanded, setMobileCommentsExpanded] = useState(false);
   const [shareToast, setShareToast] = useState(false);
+
+  // Timestamp Notes state
+  const [notes, setNotes] = useState<VideoNote[]>([]);
+  const [showNotesPanel, setShowNotesPanel] = useState(false);
+  const [noteTimestamp, setNoteTimestamp] = useState("");
+  const [noteText, setNoteText] = useState("");
+  const [noteToast, setNoteToast] = useState(false);
   
   // Metadata edit forms
   const [editTitle, setEditTitle] = useState(activeVideo.title);
@@ -91,6 +125,14 @@ export default function WatchPage({
     setEditDuration(activeVideo.duration || getVideoDuration(activeVideo));
     setDescExpanded(false);
     setMobileCommentsExpanded(false);
+    setShowNotesPanel(false);
+    // Load notes for this video from localStorage
+    const stored = localStorage.getItem(`zedistra_notes_${activeVideo.id}`);
+    if (stored) {
+      try { setNotes(JSON.parse(stored)); } catch { setNotes([]); }
+    } else {
+      setNotes([]);
+    }
   }, [activeVideo]);
 
   // Handle clicking outside 3-dot menu
@@ -105,6 +147,31 @@ export default function WatchPage({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleAddNote = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!noteText.trim()) return;
+    const newNote: VideoNote = {
+      id: `note-${Date.now()}`,
+      videoId: activeVideo.id,
+      timestamp: noteTimestamp.trim() || "--:--",
+      text: noteText.trim(),
+      createdAt: Date.now(),
+    };
+    const updated = [newNote, ...notes];
+    setNotes(updated);
+    localStorage.setItem(`zedistra_notes_${activeVideo.id}`, JSON.stringify(updated));
+    setNoteTimestamp("");
+    setNoteText("");
+    setNoteToast(true);
+    setTimeout(() => setNoteToast(false), 2000);
+  };
+
+  const handleDeleteNote = (noteId: string) => {
+    const updated = notes.filter((n) => n.id !== noteId);
+    setNotes(updated);
+    localStorage.setItem(`zedistra_notes_${activeVideo.id}`, JSON.stringify(updated));
+  };
 
   const handleShareClick = () => {
     const videoUrl = `${window.location.origin}?video=${activeVideo.id}`;
@@ -328,7 +395,7 @@ export default function WatchPage({
                 <span>Description Metadata Log</span>
               </div>
               <p className={`text-xs text-text-main leading-relaxed whitespace-pre-wrap break-all break-words text-left ${descExpanded ? "" : "line-clamp-3"}`}>
-                {activeVideo.description || "No lecture notes included."}
+                {renderDescriptionWithLinks(activeVideo.description || "No lecture notes included.")}
               </p>
               <button
                 id="watch-toggle-desc-btn"
@@ -338,6 +405,98 @@ export default function WatchPage({
                 <span>{descExpanded ? "Show Less" : "Show More"}</span>
                 {descExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </button>
+            </div>
+
+            {/* Timestamp Notes Panel */}
+            <div className="rounded-xl border border-border-custom overflow-hidden">
+              {/* Notes Header Toggle */}
+              <button
+                onClick={() => setShowNotesPanel(!showNotesPanel)}
+                className="w-full flex items-center justify-between px-4 py-3 bg-neutral-50/50 dark:bg-neutral-900/40 hover:bg-neutral-100 dark:hover:bg-neutral-800/60 transition-colors cursor-pointer"
+              >
+                <div className="flex items-center space-x-2 text-xs font-semibold text-text-sub">
+                  <StickyNote className="w-3.5 h-3.5 text-amber-500" />
+                  <span className="text-text-main">Timestamp Notes</span>
+                  {notes.length > 0 && (
+                    <span className="bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                      {notes.length}
+                    </span>
+                  )}
+                </div>
+                {showNotesPanel ? <ChevronUp className="w-4 h-4 text-text-sub" /> : <ChevronDown className="w-4 h-4 text-text-sub" />}
+              </button>
+
+              {showNotesPanel && (
+                <div className="p-4 space-y-4 bg-neutral-50/30 dark:bg-neutral-900/20">
+                  {/* Add Note Form */}
+                  <form onSubmit={handleAddNote} className="space-y-2">
+                    <div className="flex gap-2">
+                      <div className="flex items-center gap-1.5 bg-white dark:bg-neutral-800 border border-border-custom rounded-lg px-2.5 py-1.5 w-28 flex-shrink-0">
+                        <Clock className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                        <input
+                          type="text"
+                          placeholder="12:34"
+                          value={noteTimestamp}
+                          onChange={(e) => setNoteTimestamp(e.target.value)}
+                          className="w-full text-xs bg-transparent focus:outline-none text-text-main placeholder:text-text-sub"
+                          maxLength={8}
+                        />
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="এখানে note লিখো..."
+                        value={noteText}
+                        onChange={(e) => setNoteText(e.target.value)}
+                        className="flex-1 text-xs px-3 py-1.5 border border-border-custom rounded-lg bg-white dark:bg-neutral-800 focus:outline-none focus:border-amber-500 text-text-main placeholder:text-text-sub"
+                      />
+                      <button
+                        type="submit"
+                        className="flex-shrink-0 p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg cursor-pointer transition-colors"
+                        title="Note যোগ করো"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </form>
+
+                  {/* Notes List */}
+                  {notes.length === 0 ? (
+                    <p className="text-xs text-text-sub italic text-center py-2">
+                      কোনো note নেই। ভিডিও দেখতে দেখতে important জায়গায় note রাখো।
+                    </p>
+                  ) : (
+                    <div className="space-y-2 max-h-64 overflow-y-auto no-scrollbar">
+                      {notes.map((note) => (
+                        <div
+                          key={note.id}
+                          className="flex items-start gap-2.5 bg-white dark:bg-neutral-800 border border-border-custom rounded-lg px-3 py-2.5 group"
+                        >
+                          <span className="flex-shrink-0 text-[11px] font-mono font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-1.5 py-0.5 rounded mt-0.5">
+                            {note.timestamp}
+                          </span>
+                          <p className="flex-1 text-xs text-text-main leading-relaxed break-words">
+                            {note.text}
+                          </p>
+                          <button
+                            onClick={() => handleDeleteNote(note.id)}
+                            className="flex-shrink-0 opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/30 text-red-400 hover:text-red-600 cursor-pointer transition-all"
+                            title="Note মুছে ফেলো"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Saved toast */}
+                  {noteToast && (
+                    <p className="text-[11px] text-green-600 dark:text-green-400 font-semibold text-center animate-in fade-in duration-200">
+                      ✓ Note saved!
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
 
           </div>
