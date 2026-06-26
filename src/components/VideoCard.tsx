@@ -195,10 +195,10 @@ export default function VideoCard({
                   setShowMenu(!showMenu);
                   setShowPlaylistSubmenu(false);
                 }}
-                className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-text-sub hover:text-text-main cursor-pointer focus:outline-none"
+                className="p-1 rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-800 hover:text-black cursor-pointer focus:outline-none"
                 aria-label="Video management options"
               >
-                <MoreVertical className="w-3.5 h-3.5" />
+                <MoreVertical className="w-5 h-5 font-bold" />
               </button>
 
               {/* Dropdown Menu */}
