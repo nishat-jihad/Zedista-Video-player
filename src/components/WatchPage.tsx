@@ -721,9 +721,9 @@ export default function WatchPage({
 
           {/* Recommended Videos list */}
           <div id="watch-recommendations-panel" className="space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-500">Recommended Lessons</h3>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-neutral-500">Recommended Lessons</h3>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {recommended.map((video) => {
                 const ytId = extractYouTubeId(video.embedCode);
                 
@@ -735,7 +735,7 @@ export default function WatchPage({
                     className="flex space-x-3 group cursor-pointer text-left"
                   >
                     {/* Small thumbnail */}
-                    <div className="relative w-28 aspect-video bg-neutral-950 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-200">
+                    <div className="relative w-40 aspect-video bg-neutral-950 rounded-lg overflow-hidden flex-shrink-0 border border-neutral-200">
                       {ytId ? (
                         <img
                           src={`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`}
@@ -753,13 +753,13 @@ export default function WatchPage({
                     {/* Lesson texts */}
                     <div className="flex-1 min-w-0 flex flex-col justify-center">
                       <h4 
-                        className="text-xs font-semibold leading-tight text-neutral-900 group-hover:text-red-600 line-clamp-2 transition-colors"
+                        className="text-sm font-semibold leading-tight text-neutral-900 dark:text-text-main group-hover:text-red-600 line-clamp-2 transition-colors"
                         title={video.title}
                       >
                         {video.title}
                       </h4>
-                      <p className="text-[10px] text-text-sub mt-1 truncate">{video.channelName}</p>
-                      <span className="text-[9px] text-neutral-400 mt-0.5">{video.likes} likes</span>
+                      <p className="text-xs text-text-sub mt-1 truncate">{video.channelName}</p>
+                      <span className="text-xs text-neutral-400 mt-0.5">{video.likes} likes</span>
                     </div>
                   </div>
                 );
