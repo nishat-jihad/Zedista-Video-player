@@ -37,15 +37,15 @@
 }
 
 .theme-red {
-  --primary: #ef4444;
-  --primary-hover: #dc2626;
-  --bg-app: #1a0000; /* Deep dark red */
-  --bg-card: #2a0505; /* Dark red card */
-  --border-custom: #5a1a1a; /* Red-tinted border */
-  --text-main: #fff1f1;
-  --text-sub: #fca5a5;
-  --navbar-bg: #2a0505;
-  --navbar-text: #fff1f1;
+  --primary: #ff0000;
+  --primary-hover: #cc0000;
+  --bg-app: #ff0000; /* Pure red background */
+  --bg-card: #e60000; /* Slightly darker red for cards */
+  --border-custom: #cc0000;
+  --text-main: #ffffff;
+  --text-sub: #ffe0e0;
+  --navbar-bg: #cc0000;
+  --navbar-text: #ffffff;
 }
 
 body {
