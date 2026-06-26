@@ -33,3 +33,11 @@ export interface UserProfile {
   likedVideoIds: string[];
   favoriteVideoIds: string[];
 }
+
+export interface VideoNote {
+  id: string;
+  videoId: string;
+  timestamp: string; // e.g. "12:34"
+  text: string;
+  createdAt: number;
+}
