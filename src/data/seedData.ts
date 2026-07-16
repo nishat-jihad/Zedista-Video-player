@@ -4,19 +4,6 @@ export const getInitialVideos = (): Video[] => {
   const now = Date.now();
   return [
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/QWJb6-jFT3w\" title=\"HSC 2026 বাংলা রচনা সাজেশন | মাত্র ৫টি রচনা পড়লেই কি ১০০% কমন?\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "HSC 2026 বাংলা রচনা সাজেশন | মাত্র ৫টি রচনা পড়লেই কি ১০০% কমন?",
-      "description": "HSC 2026 ব্যাচের সবার জন্য — বাংলা রচনা নিয়ে আর টেনশন নয়! 🎯\nপুরো সিলেবাসের সব রচনা মুখস্থ করা প্রায় অসম্ভব, আর দরকারও নেই। এই ভিডিওতে Shakib Sir (Fahad's Tutorial) সবচেয়ে গুরুত্বপূর্ণ এবং বারবার কমন পড়া এমন ৫ ধরনের রচনা নিয়ে আলোচনা করেছেন, যেগুলো ঠিকভাবে আয়ত্ত করলে অল্প পড়েই বেশি কমন পাওয়া সম্ভব।\nএই ভিডিওতে যা যা পাবে:\n\n✅ HSC 2026 এর জন্য সবচেয়ে সম্ভাবময় ৫টি রচনা\n✅ কোন রচনা আগে পড়বে আর কোনটা পরে — সঠিক প্রায়োরিটি\n✅ পরীক্ষায় ভালো মার্কস পেতে রচনা গুছিয়ে লেখার কৌশল\n✅ শেষ মুহূর্তের প্রস্তুতির স্মার্ট টিপস",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290744498",
-      "createdAt": now - 10 * 60 * 1000, // 10 minutes ago
-      "likes": 0,
-      "duration": "12:15"
-    },
-    {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/Rbsj9_40-bA?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ICT Chapter 3 Calculator Hacks - ক্যাল্কুলেটরেই সব MCQ! 🔥\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
       "title": "ICT Chapter 3 Calculator Hacks - ক্যাল্কুলেটরেই সব MCQ! 🔥",
       "description": "1:48 - ES/Es Plus\n36:57 - Ex\n1:12:23 - CW\n1:54:21 - MS",
