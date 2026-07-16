@@ -4,6 +4,20 @@ export const getInitialVideos = (): Video[] => {
   const now = Date.now();
   return [
     {
+      "embedCode": "<iframe width="767" height="431" src="https://www.youtube.com/embed/vGeoW2PdvmU" title="১ ক্লাসে অর্থনৈতিক  রসায়ন ১০০% প্রস্তুতি । Chemistry One Shot । HSC । DDT ভাই" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>",
+      "title": "১ ক্লাসে অর্থনৈতিক রসায়ন ১০০% প্রস্তুতি । Chemistry One Shot । HSC । DDT ভাই",
+      "description": "অর্থনীতিক রসায়ন PDF লিংকঃ
+https://drive.google.com/file/d/1_hoMLo4XYYt-0bwo2BckjOAniNcdlDhk/view?usp=drivesdk",
+      "channelName": "DDT  ভাই",
+      "channelLink": "https://www.youtube.com/@DDTchemistry",
+      "category": "Recent",
+      "originalCategory": "Recent",
+      "id": "video-1782290612788",
+      "createdAt": now - 25 * 60 * 1000, //23 minutes ago
+      "likes": 0,
+      "duration": "2:08:45"
+    },
+    {
       "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/Rbsj9_40-bA?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ICT Chapter 3 Calculator Hacks - ক্যাল্কুলেটরেই সব MCQ! 🔥\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
       "title": "ICT Chapter 3 Calculator Hacks - ক্যাল্কুলেটরেই সব MCQ! 🔥",
       "description": "1:48 - ES/Es Plus\n36:57 - Ex\n1:12:23 - CW\n1:54:21 - MS",
