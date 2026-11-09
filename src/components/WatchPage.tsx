@@ -19,7 +19,7 @@ import {
   StickyNote
 } from "lucide-react";
 import { Video, Comment, Course, VideoNote } from "../types";
-import { getEmbedHtml, formatRelativeTime, extractYouTubeId, getChannelAvatarUrl, getVideoDuration } from "../utils/videoUtils";
+import { getEmbedHtml, formatRelativeTime, extractYouTubeId, getChannelAvatarUrl, getVideoDuration, buildYouTubeEmbedUrl, getYouTubeWatchUrl } from "../utils/videoUtils";
 import CommentSection from "./CommentSection.tsx";
 
 // Renders description text with clickable hyperlinks
@@ -164,7 +164,7 @@ export default function WatchPage({
     if (ytId) {
       const iframe = document.querySelector("#watch-page-container iframe") as HTMLIFrameElement;
       if (iframe) {
-        iframe.src = `https://www.youtube.com/embed/${ytId}?start=${seconds}&autoplay=1&rel=0`;
+        iframe.src = buildYouTubeEmbedUrl(ytId, seconds, true);
       }
     }
   };
@@ -268,6 +268,22 @@ export default function WatchPage({
           <div className="relative -mx-4 sm:mx-0 aspect-video rounded-none sm:rounded-2xl overflow-hidden shadow-md sm:shadow-lg border-y sm:border border-border-custom bg-black">
             <VideoPlayer embedCode={activeVideo.embedCode} />
           </div>
+
+          {/* Fallback: some uploaders disable embedding */}
+          {extractYouTubeId(activeVideo.embedCode) && (
+            <p className="px-2 sm:px-0 text-[11px] text-text-sub">
+              ভিডিও না চললে{" "}
+              <a
+                href={getYouTubeWatchUrl(extractYouTubeId(activeVideo.embedCode)!)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-600 underline"
+              >
+                YouTube-এ সরাসরি দেখুন
+              </a>
+              {" "}(কিছু চ্যানেল অন্য সাইটে এমবেড করতে দেয় না)।
+            </p>
+          )}
 
           {/* Title & Metadata & Action row */}
           <div className="space-y-3 mt-3 px-2 sm:px-0">
