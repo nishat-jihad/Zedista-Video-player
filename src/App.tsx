@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 import { Video, Comment, Course, UserProfile } from "./types";
-import { getInitialVideos, getInitialCourses, getInitialComments } from "./data/seedData";
+import { getInitialVideos, getInitialCourses, getInitialComments, SEED_VERSION } from "./data/seedData";
 import { processCategoryAging } from "./utils/videoUtils";
 import { searchAndRankVideos } from "./utils/searchUtils";
 
@@ -85,6 +85,17 @@ export default function App() {
     document.documentElement.className = storedTheme === "white" ? "theme-white" : "theme-red";
 
     // 2. Load Core Data or Seed safely
+    // If the starter catalog changed (SEED_VERSION bump), drop the old saved catalog
+    // so the new videos appear. Username and theme are kept.
+    const needsReseed = localStorage.getItem("zedistra_seed_version") !== SEED_VERSION;
+    if (needsReseed) {
+      ["zedistra_videos", "zedistra_courses", "zedistra_comments",
+       "zedistra_liked_video_ids", "zedistra_favorite_video_ids",
+       "zedistra_custom_empty_cats"].forEach((k) => localStorage.removeItem(k));
+      localStorage.setItem("zedistra_seed_version", SEED_VERSION);
+      setLikedVideoIds([]);
+      setFavoriteVideoIds([]);
+    }
     const storedVideos = localStorage.getItem("zedistra_videos");
     const storedCourses = localStorage.getItem("zedistra_courses");
     const storedComments = localStorage.getItem("zedistra_comments");
@@ -649,7 +660,7 @@ export default function App() {
                 </h3>
                 <p className="text-xs text-neutral-500 max-w-sm mx-auto mt-1 leading-relaxed">
                   {videos.length === 0 
-                    ? "Your local catalog is currently empty. You can restore the pre-loaded HSC test prep and calculator hack lectures with one click!"
+                    ? "Your local catalog is currently empty. You can restore the pre-loaded motivation, admission, productivity and surah videos with one click!"
                     : activeCategory === "Favorites" 
                       ? "You haven't saved any video items to your Favorites list yet. Click a video and star it to save!"
                       : "No lectures matched your search filters. Publish standard iframe files or create customized video files using the upload manager above."}
