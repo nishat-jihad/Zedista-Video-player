@@ -25,6 +25,33 @@ export function extractYouTubeId(urlOrEmbed: string): string | null {
   return null;
 }
 
+
+/**
+ * Builds a clean YouTube embed URL from a video id.
+ * (Playlist/list params are dropped on purpose: they are a common cause of
+ * "video unavailable" errors inside embeds.)
+ */
+export function buildYouTubeEmbedUrl(id: string, startSeconds?: number, autoplay = false): string {
+  const params = new URLSearchParams({ rel: "0", playsinline: "1", modestbranding: "1" });
+  if (startSeconds && startSeconds > 0) params.set("start", String(Math.floor(startSeconds)));
+  if (autoplay) params.set("autoplay", "1");
+  return `https://www.youtube.com/embed/${id}?${params.toString()}`;
+}
+
+export function getYouTubeWatchUrl(id: string): string {
+  return `https://www.youtube.com/watch?v=${id}`;
+}
+
+/** Reads a start time (?start=90 or ?t=90 / ?t=1m30s) from a YouTube URL, if any. */
+function extractStartSeconds(urlOrEmbed: string): number {
+  const m = urlOrEmbed.match(/[?&](?:start|t)=([0-9hms]+)/i);
+  if (!m) return 0;
+  const raw = m[1];
+  if (/^\d+$/.test(raw)) return parseInt(raw, 10);
+  const h = raw.match(/(\d+)h/i), mi = raw.match(/(\d+)m/i), se = raw.match(/(\d+)s/i);
+  return (h ? +h[1] * 3600 : 0) + (mi ? +mi[1] * 60 : 0) + (se ? +se[1] : 0);
+}
+
 /**
  * Extracts a Vimeo ID from various Vimeo formats.
  */
@@ -55,6 +82,14 @@ export function getEmbedHtml(urlOrEmbed: string): string {
   if (!urlOrEmbed) return "";
 
   let trimmed = urlOrEmbed.trim();
+
+  // YouTube (iframe code OR plain link): always rebuild a clean, known-good iframe.
+  // This guarantees a valid Referer policy and removes broken params.
+  const youTubeId = extractYouTubeId(trimmed);
+  if (youTubeId) {
+    const src = buildYouTubeEmbedUrl(youTubeId, extractStartSeconds(trimmed));
+    return `<iframe width="100%" height="100%" src="${src}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="w-full h-full"></iframe>`;
+  }
 
   // Helper to clean URL parameters
   const cleanUrlParams = (url: string): string => {
