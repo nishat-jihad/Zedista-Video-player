@@ -1,267 +1,564 @@
 import { Video, Course, Comment } from "../types";
 
+/**
+ * Bump this string whenever the starter catalog changes. App.tsx compares it with
+ * the value saved in the browser and reloads the new catalog when they differ,
+ * so people who visited before do not keep seeing the old videos.
+ */
+export const SEED_VERSION = "2026-11-motivation-v1";
+
 export const getInitialVideos = (): Video[] => {
   const now = Date.now();
   return [
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/Rbsj9_40-bA?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ICT Chapter 3 Calculator Hacks - ক্যাল্কুলেটরেই সব MCQ! 🔥\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "ICT Chapter 3 Calculator Hacks - ক্যাল্কুলেটরেই সব MCQ! 🔥",
-      "description": "1:48 - ES/Es Plus\n36:57 - Ex\n1:12:23 - CW\n1:54:21 - MS",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290612788",
-      "createdAt": now - 25 * 60 * 1000, // 25 minutes ago
+      "embedCode": "https://www.youtube.com/watch?v=7VLfGpO8rIM",
+      "title": "জীবন পরিবর্তন করা শ্রেষ্ঠ লেকচার - Best Life Changing Motivational Speech Bangla",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-7VLfGpO8rIM",
       "likes": 0,
-      "duration": "2:08:45"
+      "createdAt": now - 3 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/wY9tfRNjzqU?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ভেক্টর - Vector - ক্যালকুলেটর হ্যাক্স - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "ভেক্টর - Vector - ক্যালকুলেটর হ্যাক্স - 991 ES/ES plus, 991 EX, CW",
-      "description": "Es plus 1:15\n991 EX 20:24\nCW 34:30\ncommon for all 53:22",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290559788",
-      "createdAt": now - 40 * 60 * 1000, // 40 minutes ago
+      "embedCode": "https://www.youtube.com/watch?v=8QaiTOgbNtI",
+      "title": "কথাগুলো একা শুনুন জীবন বদলে যাবে - Best Motivational Speech Bangla",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-8QaiTOgbNtI",
       "likes": 0,
-      "duration": "58:24"
+      "createdAt": now - 4 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/k7sgHtBWSEM?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"যোগজীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "যোগজীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
-      "description": "1:18  অন্টারীকরণ\n4:32 নিদিষ্ট যোগজ\n15:01 assumption method\n 22:52 option test \n26:53 নির্দিষ্ট যোগজ",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290496208",
-      "createdAt": now - 55 * 60 * 1000, // 55 minutes ago
+      "embedCode": "https://www.youtube.com/watch?v=BlPn1QwrvoE",
+      "title": "চিন্তা পরিবর্তন করলে জীবন পরিবর্তন হয়ে যাবে - Best Motivational Speech Bangla",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-BlPn1QwrvoE",
       "likes": 0,
-      "duration": "34:12"
+      "createdAt": now - 5 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/ld0g2bj6esQ?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"অন্টারীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "অন্টারীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
-      "description": "15:10 Cw calculator\n53:11 Cw \n1:13:24 Cw\n𝗠𝗼𝗱𝘂𝗹𝘂𝘀 : catalogue > numeric calc> absolute value",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290422076",
-      "createdAt": now - 75 * 60 * 1000, // 1 hour 15m ago
+      "embedCode": "https://www.youtube.com/watch?v=9Rd9svvCshQ",
+      "title": "Best Motivational Video Speech in Bangla । Powerful Motivation",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-9Rd9svvCshQ",
       "likes": 0,
-      "duration": "1:18:45"
+      "createdAt": now - 6 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/QYIw6Pg_VXE?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"বিপরীত ত্রিকোণমিতির সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "বিপরীত ত্রিকোণমিতির সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
-      "description": "Basics\n1:26 > ES Plus\n4:46 > EX\n6:15 > CW\n\nProblem Solve\n8:02 > conversion\n11:12 \n11:55 > formula\n12:41 \n13:21\n14:06\n18:14\n19:14\n20:30\n22:26\n23:39\n25:36 > Assumption (constant / variable in options)\n33:13\n34:56\n37:17 > Equation Solving \n40:51\n42:53 > Option Test\n50:32\n52:39\n56:26 > Table\n1:02:30 > angle range given",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290356245",
-      "createdAt": now - 105 * 60 * 1000, // 1 hour 45m ago
+      "embedCode": "https://www.youtube.com/watch?v=LNuB8wRweMI",
+      "title": "জীবন বদলে দেওয়ার মতো একটি ভিডিও | Sushanta Paul",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-LNuB8wRweMI",
       "likes": 0,
-      "duration": "1:08:15"
+      "createdAt": now - 7 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/614V4t76tss?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"বহুপদী সমীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "বহুপদী সমীকরণের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
-      "description": "0:58 -  ES Plus Series\n21:25 - Ex Series\n44:52 - CW Series\n1:09:14 Common For all Calculator",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290274526",
-      "createdAt": now - 135 * 60 * 1000, // 2 hours 15m ago
+      "embedCode": "https://www.youtube.com/watch?v=Dygw7wr6itQ",
+      "title": "৩ মিনিট শোনো জীবন বদলে যাবে - Bangla Motivational Video",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-Dygw7wr6itQ",
       "likes": 0,
-      "duration": "1:15:40"
+      "createdAt": now - 8 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/MX1re8Iql0Y?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"জটীল সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই  - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "জটিল সংখ্যার সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
-      "description": "0:58 -  ES Plus Series\n21:25 - Ex Series\n34:35 - CW Series\n52:00 Common For all Calculator\n\n44:50 এখানে (CW Calculator) মডুলাস আর আর্গুমেন্ট অন্যভাবেও বের করা যায়। জটিল সংখ্যাটি তুলে EXE তে চাপ দেওয়ার পর Format বাটনে ক্লিক করলে Polar Coord নামে একটা অপশন আসে। ঐখানে চাপ দিলে মডুলাস আর আর্গুমেন্ট একসাথেই এসে পড়ে অন্য ক্যালকুলেটর গুলার মতো। তাহলে আর কষ্ট করে বের করতে হয় না। আর Rectangular Coord এ চাপ দিলে a+bi আকারে আসে।",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290213569",
-      "createdAt": now - 165 * 60 * 1000, // 2 hours 45m ago
+      "embedCode": "https://www.youtube.com/watch?v=LidEi7ZOU84",
+      "title": "লক্ষ্য যা তোমাকে ঘুমাতে দেয় না - Bangla Motivational Speech",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-LidEi7ZOU84",
       "likes": 0,
-      "duration": "56:50"
+      "createdAt": now - 9 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/ZiquEjEEidY?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ত্রিকোণমিতির সব MCQ করে ফেলো ক্যাল্কুলেটরেই  - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "ত্রিকোণমিতির সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
-      "description": "Trigonometry Calculator Basics\n0:41 ES plus \n8:19 EX\n12:09 CW\n\nProblem Solve\n17:43\n18:45 > direct value finding\n19:33\n20:06\n20:40\n21:38 > finding value of a different ratio\n22:52\n23:37\n24:21\n26:33 > Category 1 Assumption\n28:40\n29:44\n31:01\n31:39 > Category 2 Assumption\n35:13\n35:21\n36:49 > better avoid assumption\n38:33\n42:20 > Option Test\n44:25 > Assumption + Option Test\n49:58\n52:30\n56:06\n57:43\n58:37 > Properties of Triangle\n1:00:45\n1:02:55 > Calculator Table Basics\n1:12:24 > solving the 31:39 problem using table",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290152413",
-      "createdAt": now - 4 * 60 * 60 * 1000, // 4 hours ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=Cnq18be7lyA",
+      "title": "যারা জীবনে সফলতা পেতে চাও - Bangla Life Changing Motivational Speech",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-Cnq18be7lyA",
       "likes": 0,
-      "duration": "1:16:30"
+      "createdAt": now - 10 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/vqUuah_v9w0?list=PLi5fEbOt0If7Opn9oYIqxEkWMxFYRpbQZ\" title=\"ম্যাট্রিক্স ও নির্ণায়কের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "ম্যাট্রিক্স ও নির্ণায়কের সব MCQ করে ফেলো ক্যাল্কুলেটরেই - 991 ES/ES plus, 991 EX, CW",
-      "description": "Fx 991 ES Plus - 1:17\nFx 991 Ex - 15:45\nFx 991 Ex - 29:14\n\nCombined Hacks(Must for all calculator) - 47:34",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782290014411",
-      "createdAt": now - 8 * 60 * 60 * 1000, // 8 hours ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=fhlox0OkPnk",
+      "title": "সেরা মোটিভেশন গল্প - Life Changing Motivation Story",
+      "description": "সাধারণ মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Motivation",
+      "originalCategory": "Motivation",
+      "id": "video-fhlox0OkPnk",
       "likes": 0,
-      "duration": "54:10"
+      "createdAt": now - 11 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/yO-qpIO6rQU?list=PLi5fEbOt0If7Rky9DdZePw4wNFJVbGxt4\" title=\"এক ক্লাসেই জটিল সংখ্যা ১০০% কাভার - Complex Number | HSC\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "এক ক্লাসেই জটিল সংখ্যা ১০০% কাভার - Complex Number | HSC",
-      "description": "ক্লাস নোট:\nhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbUtleU9FWWROemR0UVBobnpLVXNJYmRkaG1Vd3xBQ3Jtc0tteVk4MVplWXZUUHFnQnAwQktyMHBSX29laGRfbF9YOFVXVms4LTN6MDBnSFpTdncwOUVRdE5wUm9hYWxMV0FlbTh1bEV6VWphSTl1N1Mxc1dhaUIxMzU1bFRwZG1telg0TUpjUTdlQkJJVVNXVnM1OA&q=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1lTxIwKoLeLVJz7zLfNDEGqIEJc2KQO5X%3Fusp%3Ddrive_link&v=yO-qpIO6rQU",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782289521009",
-      "createdAt": now - 12 * 60 * 60 * 1000, // 12 hours ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=KmKosIEMc_A",
+      "title": "ঢাকা মেডিকেলে চান্স পাওয়ার গল্প - DMC Admission Motivation",
+      "description": "ভর্তি প্রস্তুতি ও মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Admission Motivation",
+      "originalCategory": "Admission Motivation",
+      "id": "video-KmKosIEMc_A",
       "likes": 0,
-      "duration": "2:45:15"
+      "createdAt": now - 12 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/C1OAPt1Q26U?list=PLi5fEbOt0If7Rky9DdZePw4wNFJVbGxt4\" title=\"১ ক্লাসেই যোগাশ্রয়ী প্রোগ্রামিং ১০০% শেষ | HSC 🔥\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "১ ক্লাসেই যোগাশ্রয়ী প্রোগ্রামিং ১০০% শেষ | HSC 🔥",
-      "description": "ক্লাস নোট:\nhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbVhIUldpMHNkWi1GM016RThVc2RmSDkwZ2lkd3xBQ3Jtc0ttajhNMVZzdEE4SE9uQUV6S2E4QW5hZWFNUUdJTnF4S1d1eEkwM09JYU1ROGhfbWVuVm01eFlhRVpXSWVsdDJkenlDU18zZnJIVmpTOV9TbklsX08yN0lxcnZoTGFNSFhlWGtLc21EMzRCc3Z0UVNKdw&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1lTxIwKoLeLVJz7zLfNDEGqIEJc2KQO5X%3Fusp%3Dsharing&v=C1OAPt1Q26U",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782289427873",
-      "createdAt": now - 16 * 60 * 60 * 1000, // 16 hours ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=QEkLk4IIrA0",
+      "title": "পরীক্ষা আসার আগে অবশ্যই দেখবে! - Exam Time Best Motivational Video for Students",
+      "description": "ভর্তি প্রস্তুতি ও মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Admission Motivation",
+      "originalCategory": "Admission Motivation",
+      "id": "video-QEkLk4IIrA0",
       "likes": 0,
-      "duration": "1:38:20"
+      "createdAt": now - 13 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/dxU1TOy9jvM?list=PLi5fEbOt0If7Rky9DdZePw4wNFJVbGxt4\" title=\"বিপরীত ত্রিকোণমিতি - Inverse Trigonometry Oneshot Class!\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "বিপরীত ত্রিকোণমিতি - Inverse Trigonometry Oneshot Class!",
-      "description": "ক্লাস নোট:\nhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbkhZR2J2OW5Zc29SY2ZpZjlVdHc3QnNhRTRlUXxBQ3Jtc0tsd1JCWXN1cjhuT0pSME9nN2lQd2RBTlhQWE9BaHF5YThGV1VDZGRKNmRRcmhoc0h6Y3Vjdkx5Qmk3Y3ZhS2hreUZaWjNzVjhZVzVRSmtKRUZhcVlQTWQwWF81Zkc1ZldGX3ZBQjlVNzZmZ3Z4MTQxRQ&q=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1lTxIwKoLeLVJz7zLfNDEGqIEJc2KQO5X%3Fusp%3Ddrive_link&v=dxU1TOy9jvM",
-      "channelName": "Rakib's Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782289339915",
-      "createdAt": now - 24 * 60 * 60 * 1000, // 1 day ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=e0s9xTY_E30",
+      "title": "মেডিকেল ভর্তি পরীক্ষায় প্রথম হওয়া কে এই রাফসান?",
+      "description": "ভর্তি প্রস্তুতি ও মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Admission Motivation",
+      "originalCategory": "Admission Motivation",
+      "id": "video-e0s9xTY_E30",
       "likes": 0,
-      "duration": "2:12:40"
+      "createdAt": now - 14 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/nK0yjjK37cQ?list=PLi5fEbOt0If7GPA9drHO5PKkLY81VE\" title=\"বাংলা ১ম পত্র MCQ ম্যারাথন ক্লাস — সর্বোচ্চ কমন পাওয়ার সম্ভাবনা 🔥|| Omar Faruq Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "বাংলা ১ম পত্র MCQ ম্যারাথন ক্লাস — সর্বোচ্চ কমন পাওয়ার সম্ভাবনা 🔥|| Omar Faruq Sir",
-      "description": "বাংলা ১ম পত্র MCQ ম্যারাথন ক্লাস — সর্বোচ্চ কমন পাওয়ার সম্ভাবনা || Omar Faruq Sir\n\nএই ক্লাসের কোনো লেকচার শীট নেই। পুরো ক্লাসটা অবশ্যই ভালোভাবে দেখবে এবং মূল বই ও FRB Bangla Compact Series বই থেকে প্র্যাক্টিস করবে।",
-      "channelName": "Omar Faruq",
-      "channelLink": "https://www.youtube.com/channel/UC05SEy8gbG3D_o_K3dBDyew",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782287743188",
-      "createdAt": now - 2 * 24 * 60 * 60 * 1000, // 2 days ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=fObiwtcurKU",
+      "title": "জাতীয় মেধায় প্রথম রাফসান রাত জাগতেন না - মেডিকেল ভর্তি প্রস্তুতি",
+      "description": "ভর্তি প্রস্তুতি ও মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Admission Motivation",
+      "originalCategory": "Admission Motivation",
+      "id": "video-fObiwtcurKU",
       "likes": 0,
-      "duration": "3:04:10"
+      "createdAt": now - 15 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/txl2S89xwnw?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই বাংলা ১ম পত্র (বাংলা সহপাঠ) ১০০% কভার 🔥 — HSC Bangla 1st Paper One Shot | Omar Faruq Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "১ ক্লাসেই বাংলা ১ম পত্র (বাংলা সহপাঠ) ১০০% কভার 🔥 — HSC Bangla 1st Paper One Shot | Omar Faruq Sir",
-      "description": "বাংলা ১ম পত্র (বাংলা সহপাঠ) ওয়ানশট — ১ ক্লাসেই ১০০% কভার | HSC Bangla 1st Paper One Shot Class | Omar Faruq Sir\n\nক্লাস নোটঃhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbDlGQVJYNVItcUwteEtnODdCODNyRV9pLWo4d3xBQ3Jtc0ttako2OVBNYzFNaG1EdGhMQWp3MFBFRThSVjZWRkxFNDVLS3ZtQ1dqTkhGdzN0T3ZUWG5qVkdaM1gzRjNDbkhFb01yd0VZOTIxbW5lZFptVW1uNVl0dGYyR3RvYklzWGlfWjR2cG1QdEZOQ2k5Q2VEMA&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1Eq3GFK_xNmPjtMlIDIYDFAoU9Kd9IPaV%2Fview%3Fusp%3Ddrivesdk&v=txl2S89xwnw",
-      "channelName": "Omar Faruq",
-      "channelLink": "https://www.youtube.com/channel/UC05SEy8gbG3D_o_K3dBDyew",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782287641873",
-      "createdAt": now - 3 * 24 * 60 * 60 * 1000, // 3 days ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=953RYwVCkDg",
+      "title": "যে রুটিন ফলো করলে মেডিকেলে চান্স হবে",
+      "description": "ভর্তি প্রস্তুতি ও মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Admission Motivation",
+      "originalCategory": "Admission Motivation",
+      "id": "video-953RYwVCkDg",
       "likes": 0,
-      "duration": "2:15:30"
+      "createdAt": now - 16 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/RI1y7DxcT70?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই ইংরেজি ২য় পত্র ১০০% কমপ্লিট 🔥 — English 2nd Paper One Shot | Mir MD Jalal Sumon Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "১ ক্লাসেই ইংরেজি ২য় পত্র ১০০% কমপ্লিট 🔥 — English 2nd Paper One Shot | Mir MD Jalal Sumon Sir",
-      "description": "ইংরেজি ২য় পত্র ওয়ানশট — ১ ক্লাসেই ১০০% কভার | English 2nd Paper One Shot Class | Mir MD Jalal Sumon Sir\n\nক্লাস নোটঃhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa3Y0ZExMWHYwc3hzYnV4OWoxNVhJX2g5OWZWd3xBQ3Jtc0tsYWladFZ5ZnhsUUlhQlhDZHlaSmxVT1Z1UTkybXZLbXpSTndpNlowYUdXOGgzSVBfUzMxcXR4M3dfbGZNNHpOLTNIeWttcGxiSXdENkF5ZktYVVhNMUlnaUJGYnBraXhhYzgtTHJYcGs0bVZlX0ZCcw&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1jpAZ-MxFTnKxmb1A3H5Wxmfm1gpAVlQV%2Fview%3Fusp%3Ddrivesdk&v=RI1y7DxcT70",
-      "channelName": "UNLOCK English with Sumon",
-      "channelLink": "https://www.youtube.com/channel/UC2fH6o-fzrrSRzJTXevrqeA",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782287519385",
-      "createdAt": now - 4 * 24 * 60 * 60 * 1000, // 4 days ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=jWgXkvl4AoI",
+      "title": "যাই পড়ি, ভুলে যাই! পড়া মনে রাখার কৌশল - Dr Shawon Academy",
+      "description": "ভর্তি প্রস্তুতি ও মোটিভেশন",
+      "channelName": "YouTube",
+      "category": "Admission Motivation",
+      "originalCategory": "Admission Motivation",
+      "id": "video-jWgXkvl4AoI",
       "likes": 0,
-      "duration": "3:52:15"
+      "createdAt": now - 17 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/sSWsrnn0qa0?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই বাংলা ২য় পত্র ১০০% কভার 🔥 — HSC Bangla 2nd Paper One Shot | Omar Faruq Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "১ ক্লাসেই বাংলা ২য় পত্র ১০০% কভার 🔥 — HSC Bangla 2nd Paper One Shot | Omar Faruq Sir",
-      "description": "বাংলা ২য় পত্র ওয়ানশট — ১ ক্লাসেই ১০০% কভার | Bangla 2nd Paper One Shot Class | Omar Faruq Sir\n\nক্লাস নোটঃhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbHlJNGNmMFhodzY1dVdIU011Z2ZJZ1IzVGdOZ3xBQ3Jtc0tubDc3QjBHb1NMTlktZUppRVJXSEtGZzNkVGc4b1dKek9WaERLbkhwV1JiNkNiaFU1V3lNckFyVFRoSXI4cVpCOWFyUGpVeUpVZzNyaDBGRmxzOWlTUVJHbXBLTkJKWnRONWRNRXQ0dXl2YVBSQVlzbw&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1BrvqvJnuUceiO_tqoIcZ5wwa78nmxfRd%2Fview%3Fusp%3Ddrivesdk&v=sSWsrnn0qa0",
-      "channelName": "Omar Faruq",
-      "channelLink": "https://www.youtube.com/channel/UC05SEy8gbG3D_o_K3dBDyew",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782287431814",
-      "createdAt": now - 5 * 24 * 60 * 60 * 1000, // 5 days ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=xKc2VWj66TQ",
+      "title": "Productivity ও সময়ের বরকত বাড়াবো কীভাবে?",
+      "description": "প্রোডাক্টিভিটি ও টাইম ম্যানেজমেন্ট",
+      "channelName": "YouTube",
+      "category": "Productivity",
+      "originalCategory": "Productivity",
+      "id": "video-xKc2VWj66TQ",
       "likes": 0,
-      "duration": "2:38:10"
+      "createdAt": now - 18 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/jegosLHD8vs?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই ইংরেজি ১ম পত্র ১০০% কমপ্লিট 🔥 — English 1st Paper HSC One Shot | Mir MD Jalal Sumon Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "১ ক্লাসেই ইংরেজি ১ম পত্র ১০০% কমপ্লিট 🔥 — English 1st Paper HSC One Shot | Mir MD Jalal Sumon Sir",
-      "description": "ইংরেজি ১ম পত্র ওয়ানশট — ১ ক্লাসেই ১০০% কভার | English 1st Paper HSC One Shot Class | Mir MD Jalal Sumon Sir\n\nক্লাস নোটঃhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbmxrblBnSWZyelVpWE5heW5qOWlWMDRoaThEZ3xBQ3Jtc0tsdnBjTkFEbW10dl9ObERLaGhxLUZja0FGaWFxQmFLaUVZTEJwTFZwOFVaR1M2YVFGSk9hZXFZTEJWX3lydG5WNHFNdUNIV1Q1NjdYYkdvRWpySzM0TjB6Rk1KTzMzanRIU2VEdFc0SmdMdjl1Y1ZCaw&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F17qn0q4cgU1_ak_DPc2bI_bFYgwcy2fV6%2Fview%3Fusp%3Ddrivesdk&v=jegosLHD8vs",
-      "channelName": "UNLOCK English with Sumon",
-      "channelLink": "https://www.youtube.com/channel/UC2fH6o-fzrrSRzJTXevrqeA",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782287340247",
-      "createdAt": now - 6 * 24 * 60 * 60 * 1000, // 6 days ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=YAAYiiIFF8Y",
+      "title": "Eisenhower Matrix - কাজে ব্যস্ত, কিন্তু প্রোডাক্টিভিটি হচ্ছে না?",
+      "description": "প্রোডাক্টিভিটি ও টাইম ম্যানেজমেন্ট",
+      "channelName": "YouTube",
+      "category": "Productivity",
+      "originalCategory": "Productivity",
+      "id": "video-YAAYiiIFF8Y",
       "likes": 0,
-      "duration": "3:14:20"
+      "createdAt": now - 19 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/L_TDshu8WLs?list=PL4XrhAetwHqHENrGPA9drHO5PKkLY81VE\" title=\"১ ক্লাসেই বাংলা ১ম পত্র (গদ্য+পদ্য) ১০০% কভার 🔥 — HSC Bangla 1st Paper One Shot | Omar Faruq Sir\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "১ ক্লাসেই বাংলা ১ম পত্র (গদ্য+পদ্য) ১০০% কভার 🔥 — HSC Bangla 1st Paper One Shot | Omar Faruq Sir",
-      "description": "ক্লাস নোটঃ\nhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa2xUZkk1RUVWcEE2UHZMSldrLTFQRUFSa2E4UXxBQ3Jtc0ttaGpadGtvczB3NmJRNkV5cmFYQ0t0VHQwams1TnU5N2NpRmFUUDVpVmN2SWhLMWQzd3Z2MjUzMXAzNk5DWUg5bmJkSkZ4eTNCbXpLaFVabnFlSUtudEdFdVVqNnVnQWhOZ2ZnWXBKQzYtbW8xZ0hiUQ&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F15mpRCxaQYRg3fWrFCOH-G6GgMzabYNCn%2Fview%3Fusp%3Ddrivesdk&v=L_TDshu8WLs",
-      "channelName": "Omar Faruq",
-      "channelLink": "https://www.youtube.com/channel/UC05SEy8gbG3D_o_K3dBDyew",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782287139005",
-      "createdAt": now - 7 * 24 * 60 * 60 * 1000, // 7 days ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=CbrBXGyG0GY",
+      "title": "অলস থেকে পরিশ্রমী কীভাবে হবেন | অলসতা দূর করার উপায়",
+      "description": "প্রোডাক্টিভিটি ও টাইম ম্যানেজমেন্ট",
+      "channelName": "YouTube",
+      "category": "Productivity",
+      "originalCategory": "Productivity",
+      "id": "video-CbrBXGyG0GY",
       "likes": 0,
-      "duration": "4:28:45"
+      "createdAt": now - 20 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/JA7J7vMF1hk\" title=\"অন্টারীকরণ HSC🔥CQ Shot Series || Higher Math 1st Paper Chapter 9 | Differentiation\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "অন্তরীকরণ HSC🔥CQ Shot Series || Higher Math 1st Paper Chapter 9 | Differentiation",
-      "description": "📌Class note : https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqazBsUWhCMTFFejl0Qm1JSGt3MlVFSklOZ3VBUXxBQ3Jtc0trOUJPd0xhYmNKRDBVU0pNTWYxZlhpQUNPTVZLVV9PQTZzcnlnWGRJWDVKV0t1eFlsZUhjZWlOVVNPUlE2SW51azJidnNWZXAwVFRqYnZueXplQ2JwRmd5M1NNWFVvU0x0cHB4U2dpbmlZQnE1MDMwdw&q=https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1asVrUg0Cl8ao82ljf0HrJPE2o_g80pwQ%2Fview%3Fusp%3Dsharing&v=JA7J7vMF1hk\n\nঅন্তরীকরণ  | Higher Math 1st Paper Chapter 9 | Diferentiation | CQ Shot Series",
-      "channelName": "Dipit's learning point",
-      "channelLink": "https://www.youtube.com/@Dipits_Learning_Point",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782286733268",
-      "createdAt": now - 8 * 24 * 60 * 60 * 1000, // 8 days ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=eN83dSLsDF0",
+      "title": "অলসতা কাটিয়ে ওঠার ১৫টি সেরা উপায় - How To Overcome Laziness",
+      "description": "প্রোডাক্টিভিটি ও টাইম ম্যানেজমেন্ট",
+      "channelName": "YouTube",
+      "category": "Productivity",
+      "originalCategory": "Productivity",
+      "id": "video-eN83dSLsDF0",
       "likes": 0,
-      "duration": "1:12:10"
+      "createdAt": now - 21 * 24 * 60 * 60 * 1000
     },
     {
-      "embedCode": "<iframe width=\"767\" height=\"431\" src=\"https://www.youtube.com/embed/DKSpBV109fE\" title=\"১ ক্লাসেই অন্তরীকরণ ১০০% শেষ - Differentiation | HSC\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
-      "title": "১ ক্লাসেই অন্তরীকরণ ১০০% শেষ - Differentiation | HSC",
-      "description": "ক্লাস নোট:\nhttps://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqazhpajlTWjA2cUJvdEdiQ0d1WUZUVXl2bDUwQXxBQ3Jtc0trUnBHRkhLQk5wYkZsUmZTcF9lUFRWa1hQeGlKSlc0Vm5UZ2Q1TW5XZlZWR1NiZVVwblE1ZUV5Qkp5VmNIckxzUzdEUFlJVUFQS0pQaUNHeXhXSWhSQUtRRWVKbGhQN2JpWkVzNU93Z3paWVVvTFI0cw&q=https%3A%2F%2Fdrive.google.com%2Fdrive%2Ffolders%2F1lTxIwKoLeLVJz7zLfNDEGqIEJc2KQO5X%3Fusp%3Ddrive_link&v=DKSpBV109fE",
-      "channelName": "Rakib;s Classroom - HSC",
-      "channelLink": "https://www.youtube.com/@Rakibs_HSC",
-      "category": "Recent",
-      "originalCategory": "Recent",
-      "id": "video-1782286421296",
-      "createdAt": now - 9 * 24 * 60 * 60 * 1000, // 9 days ago (will age to Old)
+      "embedCode": "https://www.youtube.com/watch?v=QPFgjwI8LFI",
+      "title": "অলসতা দূর করার উপায় - সন্দীপ মাহেশ্বরী (Bangla)",
+      "description": "প্রোডাক্টিভিটি ও টাইম ম্যানেজমেন্ট",
+      "channelName": "YouTube",
+      "category": "Productivity",
+      "originalCategory": "Productivity",
+      "id": "video-QPFgjwI8LFI",
       "likes": 0,
-      "duration": "2:48:30"
+      "createdAt": now - 22 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=ATdRtfp2-dE",
+      "title": "I'm begging you to manage your time (English)",
+      "description": "প্রোডাক্টিভিটি ও টাইম ম্যানেজমেন্ট",
+      "channelName": "YouTube",
+      "category": "Productivity",
+      "originalCategory": "Productivity",
+      "id": "video-ATdRtfp2-dE",
+      "likes": 0,
+      "createdAt": now - 23 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=0PesyWdhxTY",
+      "title": "একা একা ভালো থাকার উপায়, একাকীত্ব দূর করার উপায়",
+      "description": "একাকীত্ব",
+      "channelName": "YouTube",
+      "category": "Loneliness",
+      "originalCategory": "Loneliness",
+      "id": "video-0PesyWdhxTY",
+      "likes": 0,
+      "createdAt": now - 24 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=V2fAZ0WTqzw",
+      "title": "একা থাকা চমৎকার একটা ব্যাপার! - সদগুরু (বাংলা)",
+      "description": "একাকীত্ব",
+      "channelName": "YouTube",
+      "category": "Loneliness",
+      "originalCategory": "Loneliness",
+      "id": "video-V2fAZ0WTqzw",
+      "likes": 0,
+      "createdAt": now - 25 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=fP7GhEVf4Zs",
+      "title": "একাকীত্ব কি সত্যিই খারাপ? | Bangla Emotional Video",
+      "description": "একাকীত্ব",
+      "channelName": "YouTube",
+      "category": "Loneliness",
+      "originalCategory": "Loneliness",
+      "id": "video-fP7GhEVf4Zs",
+      "likes": 0,
+      "createdAt": now - 26 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=pxhkwtBqaQw",
+      "title": "কিভাবে একাকীত্ব কাটিয়ে উঠবেন? Stop being Lonely",
+      "description": "একাকীত্ব",
+      "channelName": "YouTube",
+      "category": "Loneliness",
+      "originalCategory": "Loneliness",
+      "id": "video-pxhkwtBqaQw",
+      "likes": 0,
+      "createdAt": now - 27 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=ZRsS_fKtnsk",
+      "title": "কিভাবে একা খুশি থাকা যায় | How to Overcome Loneliness in Bangla",
+      "description": "একাকীত্ব",
+      "channelName": "YouTube",
+      "category": "Loneliness",
+      "originalCategory": "Loneliness",
+      "id": "video-ZRsS_fKtnsk",
+      "likes": 0,
+      "createdAt": now - 28 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=gvDFj-qooH8",
+      "title": "৬টি উপায় একাকিত্ব কাটিয়ে উঠে একা খুশি থাকার | Bangla Motivational Video",
+      "description": "একাকীত্ব",
+      "channelName": "YouTube",
+      "category": "Loneliness",
+      "originalCategory": "Loneliness",
+      "id": "video-gvDFj-qooH8",
+      "likes": 0,
+      "createdAt": now - 29 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=jcCsv4XJ0JY",
+      "title": "ব্যর্থতা আপনার জীবনের শেষ নয়! (এই ভিডিও আপনার সব হতাশা দূর করবে)",
+      "description": "হতাশা ও ব্যর্থতা",
+      "channelName": "YouTube",
+      "category": "Disappointment",
+      "originalCategory": "Disappointment",
+      "id": "video-jcCsv4XJ0JY",
+      "likes": 0,
+      "createdAt": now - 30 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=kIfynxyDrTI",
+      "title": "হতাশা থেকে বের হওয়ার ৫টি কার্যকরী কৌশল",
+      "description": "হতাশা ও ব্যর্থতা",
+      "channelName": "YouTube",
+      "category": "Disappointment",
+      "originalCategory": "Disappointment",
+      "id": "video-kIfynxyDrTI",
+      "likes": 0,
+      "createdAt": now - 31 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=MCa6e6o6tNI",
+      "title": "হতাশা ও দুশ্চিন্তা থেকে বেরিয়ে আসার উপায় - Motivation Video In Bangla",
+      "description": "হতাশা ও ব্যর্থতা",
+      "channelName": "YouTube",
+      "category": "Disappointment",
+      "originalCategory": "Disappointment",
+      "id": "video-MCa6e6o6tNI",
+      "likes": 0,
+      "createdAt": now - 32 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=BZSwqMtnHrQ",
+      "title": "ব্যর্থতার থেকে বড় মোটিভেশান আর নেই! - Powerful Motivational Video In Bangla",
+      "description": "হতাশা ও ব্যর্থতা",
+      "channelName": "YouTube",
+      "category": "Disappointment",
+      "originalCategory": "Disappointment",
+      "id": "video-BZSwqMtnHrQ",
+      "likes": 0,
+      "createdAt": now - 33 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=NAjpQb6PDp8",
+      "title": "অনুপ্রেরণামূলক গল্প - Motivational Story in Bengali",
+      "description": "হতাশা ও ব্যর্থতা",
+      "channelName": "YouTube",
+      "category": "Disappointment",
+      "originalCategory": "Disappointment",
+      "id": "video-NAjpQb6PDp8",
+      "likes": 0,
+      "createdAt": now - 34 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=o0ko0yQnC8k",
+      "title": "মনের মাঝে হতাশা চলে আসলে কি করবেন?",
+      "description": "হতাশা ও ব্যর্থতা",
+      "channelName": "YouTube",
+      "category": "Disappointment",
+      "originalCategory": "Disappointment",
+      "id": "video-o0ko0yQnC8k",
+      "likes": 0,
+      "createdAt": now - 35 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=qkti90_y6IQ",
+      "title": "নিজেকে পরিবর্তন করার উপায় - Motivational Video in Bangla",
+      "description": "নিজেকে গড়ে তোলা",
+      "channelName": "YouTube",
+      "category": "Self Improvement",
+      "originalCategory": "Self Improvement",
+      "id": "video-qkti90_y6IQ",
+      "likes": 0,
+      "createdAt": now - 36 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=66IK1UkwNl4",
+      "title": "নিজেকে যেভাবে ধাপে ধাপে পরিবর্তন করবেন",
+      "description": "নিজেকে গড়ে তোলা",
+      "channelName": "YouTube",
+      "category": "Self Improvement",
+      "originalCategory": "Self Improvement",
+      "id": "video-66IK1UkwNl4",
+      "likes": 0,
+      "createdAt": now - 37 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=jJPwbwnKkYU",
+      "title": "বদলে ফেলুন নিজেকে - কোচ কামরুল হাসান",
+      "description": "নিজেকে গড়ে তোলা",
+      "channelName": "YouTube",
+      "category": "Self Improvement",
+      "originalCategory": "Self Improvement",
+      "id": "video-jJPwbwnKkYU",
+      "likes": 0,
+      "createdAt": now - 38 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=e00jogs5U4k",
+      "title": "কিভাবে নিজেকে শৃঙ্খলাপরায়ণ করবেন - Power of Self Discipline",
+      "description": "নিজেকে গড়ে তোলা",
+      "channelName": "YouTube",
+      "category": "Self Improvement",
+      "originalCategory": "Self Improvement",
+      "id": "video-e00jogs5U4k",
+      "likes": 0,
+      "createdAt": now - 39 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=D804JAP5brQ",
+      "title": "মাত্র ৭ দিনে আপনার জীবন পরিবর্তন করুন! 7 Day Challenge to Change Yourself",
+      "description": "নিজেকে গড়ে তোলা",
+      "channelName": "YouTube",
+      "category": "Self Improvement",
+      "originalCategory": "Self Improvement",
+      "id": "video-D804JAP5brQ",
+      "likes": 0,
+      "createdAt": now - 40 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=Mwq53eIcTtQ",
+      "title": "এখন সময় নিজেকে পরিবর্তন করার! How to Make your Greatest Comeback",
+      "description": "নিজেকে গড়ে তোলা",
+      "channelName": "YouTube",
+      "category": "Self Improvement",
+      "originalCategory": "Self Improvement",
+      "id": "video-Mwq53eIcTtQ",
+      "likes": 0,
+      "createdAt": now - 41 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=mCMbGUstW6U",
+      "title": "নিজেকে পরিবর্তন করার ৩টি Secret উপায় - Bangla Motivational Video",
+      "description": "নিজেকে গড়ে তোলা",
+      "channelName": "YouTube",
+      "category": "Self Improvement",
+      "originalCategory": "Self Improvement",
+      "id": "video-mCMbGUstW6U",
+      "likes": 0,
+      "createdAt": now - 42 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=ktspzVatcX8",
+      "title": "Surah Ar-Rahman (Full) - Mishary Alafasy",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-ktspzVatcX8",
+      "likes": 0,
+      "createdAt": now - 43 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=ieHCmmiYKIQ",
+      "title": "Surah 02 - Al Baqarah - Mishary Rashid Alafasy",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-ieHCmmiYKIQ",
+      "likes": 0,
+      "createdAt": now - 44 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=9h2ud0FUGrs",
+      "title": "সূরা আল মুলক - Recitation with Bangla Translation",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-9h2ud0FUGrs",
+      "likes": 0,
+      "createdAt": now - 45 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=AwQVwjJeo68",
+      "title": "Surah Mulk | Full Recitation with Bengali Translation",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-AwQVwjJeo68",
+      "likes": 0,
+      "createdAt": now - 46 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=xm9OiXWGTXE",
+      "title": "সূরা ইয়াসীন বাংলা অর্থসহ - Surah Yasin With Bangla Translation",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-xm9OiXWGTXE",
+      "likes": 0,
+      "createdAt": now - 47 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=vl85f9M5liY",
+      "title": "হৃদয় জুড়ানো তেলাওয়াত। সুরা ইয়াসিন। বাংলা অনুবাদ সহ",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-vl85f9M5liY",
+      "likes": 0,
+      "createdAt": now - 48 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=YLkXsn98tLE",
+      "title": "Surah Al-Waqi'ah with Bangla translation - Mishari Al Afasy",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-YLkXsn98tLE",
+      "likes": 0,
+      "createdAt": now - 49 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=JLR-A1CRrk8",
+      "title": "Most heart touching recitation of Surah Waqiah",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-JLR-A1CRrk8",
+      "likes": 0,
+      "createdAt": now - 50 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=Io0WdUNVZPc",
+      "title": "Surah Al-Kahf with Bangla translation - Mishari Al Afasy",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-Io0WdUNVZPc",
+      "likes": 0,
+      "createdAt": now - 51 * 24 * 60 * 60 * 1000
+    },
+    {
+      "embedCode": "https://www.youtube.com/watch?v=Rjo1MueB6-I",
+      "title": "সূরা আল কাহফ - আবেগময় তেলাওয়াত, বাংলা অনুবাদসহ",
+      "description": "কুরআন তিলাওয়াত (সূরা)",
+      "channelName": "YouTube",
+      "category": "Surah",
+      "originalCategory": "Surah",
+      "id": "video-Rjo1MueB6-I",
+      "likes": 0,
+      "createdAt": now - 52 * 24 * 60 * 60 * 1000
     }
   ];
 };
@@ -269,30 +566,57 @@ export const getInitialVideos = (): Video[] => {
 export const getInitialCourses = (): Course[] => {
   return [
     {
-      id: "course-hsc-math",
-      name: "HSC Math Tricks & Hacks",
-      description: "Quick calculator shortcut strategies and core comprehensive syllabus guide videos on Higher Math.",
-      videoIds: ["video-1782290559788", "video-1782290496208", "video-1782290422076", "video-1782290356245", "video-1782290274526", "video-1782290213569", "video-1782290152413", "video-1782290014411", "video-1782286733268", "video-1782286421296"],
-      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000 // 30 days ago
+      id: "course-motivation",
+      name: "Motivation",
+      description: "সাধারণ মোটিভেশন",
+      videoIds: ["video-7VLfGpO8rIM", "video-8QaiTOgbNtI", "video-BlPn1QwrvoE", "video-9Rd9svvCshQ", "video-LNuB8wRweMI", "video-Dygw7wr6itQ", "video-LidEi7ZOU84", "video-Cnq18be7lyA", "video-fhlox0OkPnk"],
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000
     },
     {
-      id: "course-hsc-humanities-science",
-      name: "HSC Bangla & English Preparation",
-      description: "Full syllabus review, suggestion matrices, and writing hacks for HSC candidates.",
-      videoIds: ["video-1782290744498", "video-1782287743188", "video-1782287641873", "video-1782287519385", "video-1782287431814", "video-1782287340247", "video-1782287139005"],
-      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000 // 30 days ago
+      id: "course-admission-motivation",
+      name: "Admission Motivation",
+      description: "ভর্তি প্রস্তুতি ও মোটিভেশন",
+      videoIds: ["video-KmKosIEMc_A", "video-QEkLk4IIrA0", "video-e0s9xTY_E30", "video-fObiwtcurKU", "video-953RYwVCkDg", "video-jWgXkvl4AoI"],
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000
+    },
+    {
+      id: "course-productivity",
+      name: "Productivity",
+      description: "প্রোডাক্টিভিটি ও টাইম ম্যানেজমেন্ট",
+      videoIds: ["video-xKc2VWj66TQ", "video-YAAYiiIFF8Y", "video-CbrBXGyG0GY", "video-eN83dSLsDF0", "video-QPFgjwI8LFI", "video-ATdRtfp2-dE"],
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000
+    },
+    {
+      id: "course-loneliness",
+      name: "Loneliness",
+      description: "একাকীত্ব",
+      videoIds: ["video-0PesyWdhxTY", "video-V2fAZ0WTqzw", "video-fP7GhEVf4Zs", "video-pxhkwtBqaQw", "video-ZRsS_fKtnsk", "video-gvDFj-qooH8"],
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000
+    },
+    {
+      id: "course-disappointment",
+      name: "Disappointment",
+      description: "হতাশা ও ব্যর্থতা",
+      videoIds: ["video-jcCsv4XJ0JY", "video-kIfynxyDrTI", "video-MCa6e6o6tNI", "video-BZSwqMtnHrQ", "video-NAjpQb6PDp8", "video-o0ko0yQnC8k"],
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000
+    },
+    {
+      id: "course-self-improvement",
+      name: "Self Improvement",
+      description: "নিজেকে গড়ে তোলা",
+      videoIds: ["video-qkti90_y6IQ", "video-66IK1UkwNl4", "video-jJPwbwnKkYU", "video-e00jogs5U4k", "video-D804JAP5brQ", "video-Mwq53eIcTtQ", "video-mCMbGUstW6U"],
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000
+    },
+    {
+      id: "course-surah",
+      name: "Surah Collection",
+      description: "কুরআন তিলাওয়াত (সূরা)",
+      videoIds: ["video-ktspzVatcX8", "video-ieHCmmiYKIQ", "video-9h2ud0FUGrs", "video-AwQVwjJeo68", "video-xm9OiXWGTXE", "video-vl85f9M5liY", "video-YLkXsn98tLE", "video-JLR-A1CRrk8", "video-Io0WdUNVZPc", "video-Rjo1MueB6-I"],
+      createdAt: Date.now() - 30 * 24 * 60 * 60 * 1000
     }
   ];
 };
 
 export const getInitialComments = (): Comment[] => {
-  return [
-    {
-      id: "comment-1",
-      videoId: "video-1782290612788",
-      username: "Areeb",
-      text: "This calculator shortcut trick is exceptionally helpful for ICT examinations! Saving this for revision.",
-      createdAt: Date.now() - 5 * 60 * 1000 // 5 minutes ago
-    }
-  ];
+  return [];
 };
